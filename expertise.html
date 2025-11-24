@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expertise | Craftsman Norman</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Manrope:wght@300;400;500;600&family=Noto+Sans+Thai+Loopless:wght@300;400;500&family=Noto+Serif+Thai:wght@300;400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 
+                            dark: '#1d1d1f', gold: '#ab9367', bg: '#F5F5F7', card: '#FFFFFF'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Italiana"', '"Noto Serif Thai"', 'serif'],
+                        sans: ['"Manrope"', '"Noto Sans Thai Loopless"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #F5F5F7; font-family: 'Manrope', 'Noto Sans Thai Loopless', sans-serif; color: #1d1d1f; overflow-x: hidden; }
+        h1, h2, h3, .font-serif { font-family: 'Italiana', 'Noto Serif Thai', serif; }
+        body.lang-th h1, body.lang-th h2 { line-height: 1.2; }
+        
+        .text-shadow-strong { text-shadow: 0 4px 30px rgba(0,0,0,0.8), 0 1px 3px rgba(0,0,0,0.5); }
+
+        /* Custom Cursor */
+        @media (hover: none) { body { cursor: auto; } #custom-cursor { display: none; } }
+        #custom-cursor { 
+            position: fixed; top: 0; left: 0; width: 16px; height: 16px; 
+            background-color: rgba(29, 29, 31, 0.2); border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%; pointer-events: none; z-index: 20000; 
+            transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s;
+            background-position: center; background-repeat: no-repeat;
+        }
+        #custom-cursor.hovered { width: 40px; height: 40px; background-color: rgba(171, 147, 103, 0.2); border: 1px solid #ab9367; }
+        #custom-cursor.magnifying {
+            width: 80px; height: 80px; background-color: #fff; border: 2px solid #ab9367;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); background-size: 200%;
+        }
+
+        /* Rounding & Parallax */
+        #hero-container, .rounded-section { 
+            clip-path: inset(0 round 32px); 
+            transition: clip-path 1s cubic-bezier(0.77, 0, 0.175, 1); 
+        }
+        .parallax-bg {
+            background-attachment: fixed; background-position: center; background-size: cover;
+        }
+        .protected-media { -webkit-user-drag: none; user-select: none; pointer-events: none; }
+
+        /* Service Card Hover */
+        .service-card { transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
+        .service-card:hover { transform: translateY(-10px); }
+
+        /* Marquee Animation */
+        .marquee-track { display: flex; gap: 8rem; animation: marquee 100s linear infinite; width: max-content; }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        
+        /* Partner Logo Style (No Grayscale) */
+        .partner-logo { 
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
+            cursor: pointer; 
+            object-fit: contain; 
+        }
+        .partner-item:hover .partner-logo { 
+            transform: scale(1.05); 
+        }
+    </style>
+</head>
+<body oncontextmenu="return false"> 
+    <script src="layout.js"></script>
+    <div id="custom-cursor"></div>
+
+    <main class="pt-24 px-4 pb-4">
+        
+        <header class="relative w-full max-w-[1600px] mx-auto h-[85vh] mb-24">
+            <div id="hero-container" class="w-full h-full relative overflow-hidden bg-black shadow-2xl">
+                <div class="absolute inset-0">
+                    <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=2000" class="w-full h-full object-cover opacity-70 parallax-bg protected-media">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                </div>
+                
+                <div class="absolute bottom-0 left-0 w-full p-6 md:p-12 z-20">
+                    <div class="flex flex-col md:flex-row items-end justify-between">
+                        <div>
+                            <span class="text-brand-gold text-xs uppercase tracking-[0.3em] font-bold mb-4 block" data-i18n="exp_subtitle">What We Do</span>
+                            <h1 class="text-white text-6xl md:text-9xl font-serif leading-[0.9] tracking-tight mb-8 md:mb-0 drop-shadow-lg text-shadow-strong" data-i18n="hero_title">
+                                The Art of <br><span class="italic text-brand-gold">Precision.</span>
+                            </h1>
+                        </div>
+                        <div class="backdrop-blur-xl bg-white/10 p-8 rounded-[32px] border border-white/20 max-w-lg shadow-lg">
+                             <p class="text-white/95 text-sm md:text-base font-sans leading-relaxed" data-i18n="exp_desc">
+                                Comprehensive design services tailored for the elite. From conceptual architecture to the finest interior details.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="max-w-[1600px] mx-auto mb-32 px-6">
+            <div class="text-center mb-20">
+                <span class="text-brand-gold uppercase tracking-[0.3em] text-xs mb-4 block" data-i18n="services_label">Our Services</span>
+                <h2 class="text-4xl md:text-6xl font-serif text-brand-dark" data-i18n="services_title">Expertise</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="group service-card relative h-[500px] md:col-span-3 bg-white rounded-[32px] overflow-hidden shadow-sm border border-brand-dark/5 magnetic-btn">
+                    <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=2000" class="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:scale-105 transition duration-1000 protected-media">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-100"></div>
+                    <div class="absolute bottom-8 left-8 right-8 md:w-1/2">
+                        <div class="backdrop-blur-xl bg-white/10 p-8 rounded-[24px] border border-white/20 shadow-lg">
+                            <span class="text-brand-gold font-serif text-5xl mb-4 block">01</span>
+                            <h3 class="text-white text-3xl font-serif mb-2" data-i18n="srv_arch">Architecture Design</h3>
+                            <p class="text-white/80 text-sm leading-relaxed" data-i18n="srv_arch_desc">Holistic architectural services ranging from site analysis to structural engineering.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group service-card relative h-[500px] bg-[#1d1d1f] rounded-[32px] overflow-hidden shadow-sm border border-brand-dark/5 magnetic-btn">
+                    <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1000" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition duration-1000 protected-media">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-100"></div>
+                    <div class="absolute bottom-6 left-6 right-6">
+                        <div class="backdrop-blur-xl bg-white/10 p-6 rounded-[24px] border border-white/20 shadow-lg">
+                            <span class="text-brand-gold font-serif text-4xl mb-2 block">02</span>
+                            <h3 class="text-white text-2xl font-serif mb-2" data-i18n="srv_interior">Interior & Furniture</h3>
+                            <p class="text-white/70 text-xs leading-relaxed" data-i18n="srv_interior_desc">Crafting atmosphere through space, light, and texture. Including bespoke furniture design.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group service-card relative h-[500px] bg-white rounded-[32px] overflow-hidden shadow-sm border border-brand-dark/5 magnetic-btn">
+                    <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1000" class="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:scale-105 transition duration-1000 protected-media">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent opacity-100"></div>
+                    <div class="absolute bottom-6 left-6 right-6">
+                        <div class="backdrop-blur-xl bg-white/10 p-6 rounded-[24px] border border-white/20 shadow-lg">
+                            <span class="text-brand-gold font-serif text-4xl mb-2 block">03</span>
+                            <h3 class="text-white text-2xl font-serif mb-2" data-i18n="srv_turnkey">Renovation & Turnkey</h3>
+                            <p class="text-white/70 text-xs leading-relaxed" data-i18n="srv_turnkey_desc">End-to-end project management. Construction, procurement, and installation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group service-card relative h-[500px] bg-brand-bg rounded-[32px] overflow-hidden shadow-sm border border-brand-dark/5 magnetic-btn">
+                    <img src="https://images.unsplash.com/photo-1626785774573-4b799315542f?q=80&w=1000" class="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:scale-105 transition duration-1000 protected-media">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent opacity-100"></div>
+                    <div class="absolute bottom-6 left-6 right-6">
+                        <div class="backdrop-blur-xl bg-white/10 p-6 rounded-[24px] border border-white/20 shadow-lg">
+                            <span class="text-brand-gold font-serif text-4xl mb-2 block">04</span>
+                            <h3 class="text-white text-2xl font-serif mb-2" data-i18n="srv_brand">Graphic & Branding</h3>
+                            <p class="text-white/70 text-xs leading-relaxed" data-i18n="srv_brand_desc">Creating cohesive brand identities, visual assets, and digital content.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group service-card relative h-[400px] bg-white rounded-[32px] overflow-hidden shadow-sm border border-brand-dark/5 magnetic-btn">
+                     <img src="https://images.unsplash.com/photo-1579632652768-6cb9dcf85912?q=80&w=1000" class="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:scale-105 transition duration-1000 protected-media">
+                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-100"></div>
+                    <div class="absolute bottom-6 left-6 right-6">
+                        <div class="backdrop-blur-xl bg-white/10 p-6 rounded-[24px] border border-white/20 shadow-lg">
+                            <span class="text-brand-gold font-serif text-4xl mb-2 block">05</span>
+                            <h3 class="text-white text-2xl font-serif mb-2" data-i18n="srv_video">Video & Content</h3>
+                            <p class="text-white/70 text-xs leading-relaxed" data-i18n="srv_video_desc">Cinematic storytelling for properties. High-quality video tours.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group service-card relative h-[400px] bg-[#1d1d1f] rounded-[32px] overflow-hidden shadow-sm magnetic-btn">
+                     <div class="w-full h-full flex flex-col justify-center items-center text-center p-8 border border-brand-gold/20 rounded-[32px]">
+                        <span class="text-brand-gold font-serif text-4xl mb-2">06</span>
+                        <h3 class="text-white text-2xl font-serif mb-2" data-i18n="srv_product">Product Design</h3>
+                        <p class="text-white/60 text-xs max-w-xs" data-i18n="srv_product_desc">Innovative lifestyle products blending form and function.</p>
+                    </div>
+                </div>
+
+                <div class="group service-card relative h-[400px] bg-white border border-brand-dark/5 rounded-[32px] overflow-hidden shadow-sm magnetic-btn">
+                    <div class="w-full h-full flex flex-col justify-center items-center text-center p-8">
+                        <span class="text-brand-gold font-serif text-4xl mb-2">07</span>
+                        <h3 class="text-brand-dark text-2xl font-serif mb-2" data-i18n="srv_consult">Consultancy</h3>
+                        <p class="text-brand-dark/60 text-xs max-w-xs" data-i18n="srv_consult_desc">Expert advice on project feasibility and strategy.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="py-8 bg-[#1d1d1f] text-white border-t border-white/10 border-b border-white/10 overflow-hidden mb-32">
+            <div class="marquee-track">
+                <span class="text-2xl font-serif opacity-60 hover:opacity-100 hover:text-brand-gold transition duration-300 cursor-default">Feasibility Study</span>
+                <span class="text-2xl font-serif opacity-60 hover:opacity-100 hover:text-brand-gold transition duration-300 cursor-default">Lighting Design</span>
+                <span class="text-2xl font-serif opacity-60 hover:opacity-100 hover:text-brand-gold transition duration-300 cursor-default">Landscape Architecture</span>
+                <span class="text-2xl font-serif opacity-60 hover:opacity-100 hover:text-brand-gold transition duration-300 cursor-default">Art Curation</span>
+                <span class="text-2xl font-serif opacity-60 hover:opacity-100 hover:text-brand-gold transition duration-300 cursor-default">Smart Home Integration</span>
+                <span class="text-2xl font-serif opacity-60 hover:opacity-100 hover:text-brand-gold transition duration-300 cursor-default">Budget Planning</span>
+                
+                <span class="text-2xl font-serif opacity-60 hover:opacity-100 hover:text-brand-gold transition duration-300 cursor-default">Feasibility Study</span>
+                <span class="text-2xl font-serif opacity-60 hover:opacity-100 hover:text-brand-gold transition duration-300 cursor-default">Lighting Design</span>
+                <span class="text-2xl font-serif opacity-60 hover:opacity-100 hover:text-brand-gold transition duration-300 cursor-default">Landscape Architecture</span>
+                <span class="text-2xl font-serif opacity-60 hover:opacity-100 hover:text-brand-gold transition duration-300 cursor-default">Art Curation</span>
+                <span class="text-2xl font-serif opacity-60 hover:opacity-100 hover:text-brand-gold transition duration-300 cursor-default">Smart Home Integration</span>
+                <span class="text-2xl font-serif opacity-60 hover:opacity-100 hover:text-brand-gold transition duration-300 cursor-default">Budget Planning</span>
+            </div>
+        </section>
+
+        <section class="py-32 bg-[#1d1d1f] text-white relative overflow-hidden rounded-[32px] mx-4 mb-24">
+            <div class="max-w-6xl mx-auto px-6 relative z-10">
+                <div class="text-center mb-24">
+                    <span class="text-brand-gold uppercase tracking-[0.3em] text-xs mb-4 block" data-i18n="process_label">How We Work</span>
+                    <h2 class="text-4xl md:text-6xl font-serif" data-i18n="process_title">The Design Journey</h2>
+                </div>
+
+                <div class="space-y-16 relative">
+                    <div class="absolute left-[20px] md:left-1/2 top-0 bottom-0 w-[1px] bg-white/10 transform md:-translate-x-1/2 hidden md:block"></div>
+
+                    <div class="flex flex-col md:flex-row items-center justify-between group">
+                        <div class="w-full md:w-5/12 md:text-right order-2 md:order-1 pl-16 md:pl-0">
+                            <h3 class="text-3xl font-serif mb-3 text-brand-gold" data-i18n="step_1_title">Discovery</h3>
+                            <p class="text-white/60 text-sm leading-relaxed" data-i18n="step_1_desc">We listen. Every project starts with a deep dive into your needs, lifestyle, and vision. We analyze the site and feasibility to set a solid foundation.</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-full bg-brand-dark border border-brand-gold flex items-center justify-center text-brand-gold font-serif text-sm relative z-10 order-1 md:order-2 mb-4 md:mb-0 absolute left-0 md:static">01</div>
+                        <div class="w-full md:w-5/12 order-3"></div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row items-center justify-between group">
+                        <div class="w-full md:w-5/12 order-3 md:order-1"></div>
+                        <div class="w-10 h-10 rounded-full bg-brand-dark border border-white/20 group-hover:border-brand-gold flex items-center justify-center text-white group-hover:text-brand-gold font-serif text-sm relative z-10 order-1 md:order-2 mb-4 md:mb-0 absolute left-0 md:static transition duration-500">02</div>
+                        <div class="w-full md:w-5/12 order-2 md:order-3 pl-16 md:pl-0">
+                            <h3 class="text-3xl font-serif mb-3 group-hover:text-brand-gold transition duration-500" data-i18n="step_2_title">Concept Curation</h3>
+                            <p class="text-white/60 text-sm leading-relaxed" data-i18n="step_2_desc">Translating abstract ideas into tangible visuals. We present mood boards, material palettes, and initial layouts that capture the 'soul' of the project.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row items-center justify-between group">
+                        <div class="w-full md:w-5/12 md:text-right order-2 md:order-1 pl-16 md:pl-0">
+                            <h3 class="text-3xl font-serif mb-3 group-hover:text-brand-gold transition duration-500" data-i18n="step_3_title">Detail & Refinement</h3>
+                            <p class="text-white/60 text-sm leading-relaxed" data-i18n="step_3_desc">Precision is key. We produce detailed technical drawings, select exact furniture pieces, and finalize specifications to ensure flawless execution.</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-full bg-brand-dark border border-white/20 group-hover:border-brand-gold flex items-center justify-center text-white group-hover:text-brand-gold font-serif text-sm relative z-10 order-1 md:order-2 mb-4 md:mb-0 absolute left-0 md:static transition duration-500">03</div>
+                        <div class="w-full md:w-5/12 order-3"></div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row items-center justify-between group">
+                        <div class="w-full md:w-5/12 order-3 md:order-1"></div>
+                        <div class="w-10 h-10 rounded-full bg-brand-dark border border-white/20 group-hover:border-brand-gold flex items-center justify-center text-white group-hover:text-brand-gold font-serif text-sm relative z-10 order-1 md:order-2 mb-4 md:mb-0 absolute left-0 md:static transition duration-500">04</div>
+                        <div class="w-full md:w-5/12 order-2 md:order-3 pl-16 md:pl-0">
+                            <h3 class="text-3xl font-serif mb-3 group-hover:text-brand-gold transition duration-500" data-i18n="step_4_title">Realization</h3>
+                            <p class="text-white/60 text-sm leading-relaxed" data-i18n="step_4_desc">Bringing the dream to life. Our team manages the construction process, overseeing quality control until the final handover of your masterpiece.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-[1600px] mx-auto mb-24 px-6">
+            <div class="text-center mb-16">
+                <span class="text-brand-gold uppercase tracking-[0.3em] text-xs mb-4 block" data-i18n="del_label">Tangible Value</span>
+                <h2 class="text-3xl md:text-4xl font-serif text-brand-dark" data-i18n="del_title">What We Deliver</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="p-8 bg-white rounded-[24px] border border-brand-dark/5 hover:shadow-lg transition duration-300 magnetic-btn">
+                    <i class="fa-solid fa-file-contract text-3xl text-brand-gold mb-4"></i>
+                    <h4 class="font-serif text-xl mb-2" data-i18n="del_1_title">Precision Blueprints</h4>
+                    <p class="text-sm text-brand-dark/60" data-i18n="del_1_desc">Full construction drawing sets, BOQ, and specifications ready for contractors.</p>
+                </div>
+                <div class="p-8 bg-white rounded-[24px] border border-brand-dark/5 hover:shadow-lg transition duration-300 magnetic-btn">
+                    <i class="fa-solid fa-vr-cardboard text-3xl text-brand-gold mb-4"></i>
+                    <h4 class="font-serif text-xl mb-2" data-i18n="del_2_title">Visual Immersion</h4>
+                    <p class="text-sm text-brand-dark/60" data-i18n="del_2_desc">Photorealistic 3D renderings and VR walkthroughs to see before you build.</p>
+                </div>
+                <div class="p-8 bg-white rounded-[24px] border border-brand-dark/5 hover:shadow-lg transition duration-300 magnetic-btn">
+                    <i class="fa-solid fa-swatchbook text-3xl text-brand-gold mb-4"></i>
+                    <h4 class="font-serif text-xl mb-2" data-i18n="del_3_title">Material Library</h4>
+                    <p class="text-sm text-brand-dark/60" data-i18n="del_3_desc">Physical material boards and samples curated specifically for your project.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 max-w-[1600px] mx-auto px-6 mb-24 border-t border-brand-dark/10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16">
+                <div>
+                    <span class="text-brand-gold uppercase tracking-[0.3em] text-xs mb-4 block" data-i18n="mat_label">The Details</span>
+                    <h2 class="text-4xl md:text-5xl font-serif text-brand-dark" data-i18n="mat_title">Material &<br>Craftsmanship</h2>
+                </div>
+                <p class="text-brand-dark/60 max-w-md text-sm mt-6 md:mt-0" data-i18n="mat_desc">We don't just select materials; we curate textures that tell a story. Every stone, wood, and fabric is chosen for its character and longevity.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="h-[400px] overflow-hidden group relative rounded-2xl magnetic-btn">
+                    <img src="https://images.unsplash.com/photo-1616046229478-9901c5536a45?q=80&w=1000" class="w-full h-full object-cover protected-media transition duration-700" alt="Stone">
+                </div>
+                <div class="h-[400px] overflow-hidden group relative rounded-2xl md:-mt-12 magnetic-btn">
+                    <img src="https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=80&w=1000" class="w-full h-full object-cover protected-media transition duration-700" alt="Wood">
+                </div>
+                <div class="h-[400px] overflow-hidden group relative rounded-2xl magnetic-btn">
+                    <img src="https://images.unsplash.com/photo-1520699697851-3dc68aa3a474?q=80&w=1000" class="w-full h-full object-cover protected-media transition duration-700" alt="Fabric">
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 bg-white overflow-hidden mb-24 rounded-[32px] mx-auto max-w-[1600px]">
+            <div class="px-6 md:px-12 mb-16 text-center">
+                <span class="text-[10px] uppercase tracking-[0.3em] text-brand-dark/40 font-bold mb-4 block" data-i18n="partner_label">Trusted By</span>
+                <h3 class="text-3xl font-serif text-brand-dark relative inline-block" data-i18n="partner_title">
+                    Strategic Partners
+                    <span class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-[1px] bg-brand-gold"></span>
+                </h3>
+            </div>
+            
+            <div class="flex flex-col md:flex-row justify-center items-center gap-16 md:gap-32 px-6">
+                <div class="flex flex-col items-center group partner-item magnetic-btn">
+                    <div class="h-32 w-auto flex items-center justify-center mb-4">
+                        <img src="partner1.jpg" class="h-full w-auto object-contain partner-logo" alt="Modernform">
+                    </div>
+                    <div class="text-center">
+                        <p class="text-xs text-brand-dark/50 uppercase tracking-wider font-bold" data-i18n="partner_1_name">โมเดอร์นฟอร์ม</p>
+                    </div>
+                </div>
+
+                <div class="hidden md:block w-[1px] h-24 bg-brand-dark/10"></div>
+
+                <div class="flex flex-col items-center group partner-item magnetic-btn">
+                    <div class="h-32 w-auto flex items-center justify-center mb-4">
+                        <img src="partner2.jpg" class="h-full w-auto object-contain partner-logo" alt="Chalong Krung">
+                    </div>
+                    <div class="text-center">
+                         <p class="text-xs text-brand-dark/50 uppercase tracking-wider font-bold" data-i18n="partner_2_name">ฉลองกรุง เฟอร์นิเจอร์แลนด์</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div id="footer-placeholder"></div>
+
+    </main>
+
+    <script>
+        // Scroll Animation
+        const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smooth: true });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+        
+        // Page Translations
+        const pageTranslations = {
+            en: {
+                exp_subtitle: "What We Do", 
+                exp_desc: "Comprehensive design services tailored for the elite. From conceptual architecture to the finest interior details.",
+                services_label: "Our Services", services_title: "Expertise",
+                trusted_label: "TRUSTED BY", trusted_title: "Strategic Partners",
+                
+                hero_title: "The Art of <br><span class='italic text-brand-gold'>Precision.</span>",
+
+                srv_arch: "Architecture Design", srv_arch_desc: "Holistic architectural services ranging from site analysis to structural engineering, ensuring aesthetic mastery meets structural integrity.",
+                srv_interior: "Interior & Furniture", srv_interior_desc: "Crafting atmosphere through space, light, and texture. Including bespoke furniture design and built-in solutions.",
+                srv_turnkey: "Renovation & Turnkey", srv_turnkey_desc: "End-to-end project management. We handle construction, procurement, and installation.",
+                srv_brand: "Graphic & Branding", srv_brand_desc: "Cohesive brand identities, visual assets, and digital content.",
+                srv_video: "Video & Content", srv_video_desc: "Cinematic storytelling for properties. High-quality video tours.",
+                srv_product: "Product Design", srv_product_desc: "Innovative lifestyle products blending form and function.",
+                srv_consult: "Consultancy", srv_consult_desc: "Expert advice on project feasibility, investment value, and design strategy.",
+
+                process_label: "How We Work", process_title: "The Design Journey",
+                step_1_title: "Discovery & Consultation", step_1_desc: "We listen. Every project starts with a deep dive into your needs, lifestyle, and vision. We analyze the site and feasibility to set a solid foundation.",
+                step_2_title: "Concept Curation", step_2_desc: "Translating abstract ideas into tangible visuals. We present mood boards, material palettes, and initial layouts that capture the 'soul' of the project.",
+                step_3_title: "Detail & Refinement", step_3_desc: "Precision is key. We produce detailed technical drawings, select exact furniture pieces, and finalize specifications to ensure flawless execution.",
+                step_4_title: "Realization", step_4_desc: "Bringing the dream to life. Our team manages the construction process, overseeing quality control until the final handover of your masterpiece.",
+
+                del_label: "Tangible Value", del_title: "What We Deliver",
+                del_1_title: "Precision Blueprints", del_1_desc: "Full construction drawing sets, BOQ, and specifications ready for contractors.",
+                del_2_title: "Visual Immersion", del_2_desc: "Photorealistic 3D renderings and VR walkthroughs to see before you build.",
+                del_3_title: "Material Library", del_3_desc: "Physical material boards and samples curated specifically for your project.",
+
+                mat_label: "The Details", mat_title: "Material &<br>Craftsmanship", mat_desc: "We don't just select materials; we curate textures that tell a story. Every stone, wood, and fabric is chosen for its character and longevity.",
+
+                partner_label: "TRUSTED BY", partner_title: "Strategic Partners",
+                partner_1_name: "MODERNFORM", partner_2_name: "CHALONG KRUNG FURNITURE LAND"
+            },
+            th: {
+                exp_subtitle: "บริการของเรา", 
+                exp_desc: "บริการออกแบบครบวงจรสำหรับลูกค้าคนพิเศษ ตั้งแต่สถาปัตยกรรมเชิงแนวคิด ไปจนถึงรายละเอียดการตกแต่งภายในที่ประณีตที่สุด",
+                services_label: "บริการของเรา", services_title: "ความเชี่ยวชาญ",
+                trusted_label: "ได้รับความไว้วางใจจาก", trusted_title: "พาร์ทเนอร์ทางกลยุทธ์",
+                
+                hero_title: "ศิลปะแห่ง<br><span class='italic text-brand-gold'>ความแม่นยำ</span>",
+
+                srv_arch: "ออกแบบสถาปัตยกรรม", srv_arch_desc: "บริการสถาปัตยกรรมครบวงจร ตั้งแต่การวิเคราะห์พื้นที่ไปจนถึงวิศวกรรมโครงสร้าง เพื่อความงามที่มาพร้อมความแข็งแกร่ง",
+                srv_interior: "ตกแต่งภายในและเฟอร์นิเจอร์", srv_interior_desc: "สร้างบรรยากาศด้วยพื้นที่ แสง และพื้นผิว รวมไปถึงการออกแบบเฟอร์นิเจอร์สั่งทำพิเศษ",
+                srv_turnkey: "รีโนเวทและเทิร์นคีย์", srv_turnkey_desc: "บริหารโครงการแบบครบวงจร ตั้งแต่ก่อสร้าง จัดซื้อ ไปจนถึงติดตั้ง",
+                srv_brand: "กราฟิกและแบรนด์ดิ้ง", srv_brand_desc: "สร้างอัตลักษณ์แบรนด์ ภาพลักษณ์ และคอนเทนต์ดิจิทัลที่สอดคล้องกัน",
+                srv_video: "วิดีโอและคอนเทนต์", srv_video_desc: "การเล่าเรื่องผ่านภาพเคลื่อนไหวคุณภาพสูง เพื่อถ่ายทอดอารมณ์",
+                srv_product: "ออกแบบผลิตภัณฑ์", srv_product_desc: "นวัตกรรมผลิตภัณฑ์ไลฟ์สไตล์ที่ผสานรูปทรงและการใช้งาน",
+                srv_consult: "ที่ปรึกษาโครงการ", srv_consult_desc: "คำแนะนำจากผู้เชี่ยวชาญด้านความคุ้มค่าในการลงทุน และกลยุทธ์การออกแบบ",
+
+                process_label: "ขั้นตอนการทำงาน", process_title: "เส้นทางสู่ดีไซน์",
+                step_1_title: "ค้นหาและปรึกษา", step_1_desc: "เรารับฟัง ทุกโครงการเริ่มจากการทำความเข้าใจความต้องการและไลฟ์สไตล์ของคุณ เพื่อวางรากฐานที่มั่นคง",
+                step_2_title: "สร้างสรรค์แนวคิด", step_2_desc: "แปลงไอเดียเป็นภาพที่จับต้องได้ เรานำเสนอ Mood Board และแบบร่างเพื่อจับ 'จิตวิญญาณ' ของโครงการ",
+                step_3_title: "ลงรายละเอียด", step_3_desc: "ความแม่นยำคือหัวใจ เราเขียนแบบเทคนิค เลือกเฟอร์นิเจอร์ และกำหนดสเปคอย่างละเอียดเพื่อความสมบูรณ์แบบ",
+                step_4_title: "สร้างจริง", step_4_desc: "ทำให้ฝันเป็นจริง ทีมงานเราบริหารการก่อสร้างและควบคุมคุณภาพจนถึงขั้นตอนสุดท้ายของการส่งมอบ",
+
+                del_label: "สิ่งที่คุณได้รับ", del_title: "ผลลัพธ์ที่จับต้องได้",
+                del_1_title: "พิมพ์เขียวที่แม่นยำ", del_1_desc: "ชุดแบบก่อสร้างฉบับสมบูรณ์ BOQ และรายละเอียดสเปควัสดุ พร้อมสำหรับผู้รับเหมา",
+                del_2_title: "ภาพเสมือนจริง", del_2_desc: "ภาพเรนเดอร์ 3 มิติคุณภาพสูง และ VR Walkthrough ให้คุณเห็นภาพก่อนสร้างจริง",
+                del_3_title: "คลังวัสดุ", del_3_desc: "บอร์ดวัสดุจริงและตัวอย่าง (Sample) ที่คัดสรรมาเฉพาะสำหรับโครงการของคุณ",
+
+                mat_label: "รายละเอียด", mat_title: "วัสดุและ<br>งานฝีมือ", mat_desc: "เราไม่ได้แค่เลือกวัสดุ แต่เราคัดสรรพื้นผิวที่บอกเล่าเรื่องราว หิน ไม้ และผ้าทุกชิ้นถูกเลือกเพื่อเอกลักษณ์และความคงทน",
+                
+                partner_label: "ได้รับความไว้วางใจจาก", partner_title: "พันธมิตรเชิงกลยุทธ์",
+                partner_1_name: "โมเดอร์นฟอร์ม", partner_2_name: "ฉลองกรุง<br>เฟอร์นิเจอร์แลนด์"
+            }
+        };
+    </script>
+</body>
+</html>

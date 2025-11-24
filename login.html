@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Access | Craftsman Norman</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Manrope:wght@300;400;500;600&family=Noto+Sans+Thai+Loopless:wght@300;400;500&family=Noto+Serif+Thai:wght@300;400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 
+                            dark: '#1d1d1f', gold: '#ab9367', bg: '#F5F5F7', card: '#FFFFFF'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Italiana"', '"Noto Serif Thai"', 'serif'],
+                        sans: ['"Manrope"', '"Noto Sans Thai Loopless"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { background-color: #1d1d1f; color: white; font-family: 'Manrope', 'Noto Sans Thai Loopless', sans-serif; overflow: hidden; }
+        
+        /* --- VVIP ISOLATION PROTOCOL --- */
+        /* ซ่อน Navbar, Footer, Chat และปุ่มภาษา ที่มาจาก layout.js */
+        #navbar, #footer, #chat-container, #lang-btn, #menu-overlay { display: none !important; }
+        
+        #custom-cursor { 
+            position: fixed; top: 0; left: 0; width: 16px; height: 16px; 
+            background-color: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%; pointer-events: none; z-index: 20000; 
+            transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s;
+        }
+        #custom-cursor.hovered { width: 40px; height: 40px; background-color: rgba(171, 147, 103, 0.2); border: 1px solid #ab9367; }
+        
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus, 
+        input:-webkit-autofill:active{
+            -webkit-box-shadow: 0 0 0 30px #1d1d1f inset !important;
+            -webkit-text-fill-color: white !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+
+        .spinner {
+            border: 2px solid rgba(255,255,255,0.1);
+            border-left-color: #ab9367;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body oncontextmenu="return false">
+    
+    <div id="custom-cursor"></div>
+
+    <div class="fixed inset-0 z-0 opacity-30">
+        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000" class="w-full h-full object-cover grayscale">
+        <div class="absolute inset-0 bg-[#1d1d1f]/90"></div> 
+    </div>
+
+    <a href="index.html" onclick="navTo(event, 'home')" class="fixed top-8 left-8 z-50 text-white/30 hover:text-brand-gold transition duration-500 magnetic-btn flex items-center gap-3 fade-in-element opacity-0 -translate-x-4">
+        <i class="fa-solid fa-arrow-left-long text-sm"></i>
+        <span class="text-[10px] uppercase tracking-[0.2em]" data-i18n="back_to_site">Back</span>
+    </a>
+
+    <main class="relative z-10 w-full h-screen flex flex-col items-center justify-center px-6">
+        
+        <div class="mb-16 text-center fade-in-element opacity-0 translate-y-8">
+            <h1 class="text-3xl md:text-4xl font-serif text-white mb-3 tracking-wide" data-i18n="login_title">Private Access</h1>
+            <div class="w-12 h-[1px] bg-brand-gold mx-auto mb-4"></div>
+            <p class="text-brand-gold/60 text-[9px] uppercase tracking-[0.4em]" data-i18n="login_subtitle">Craftsman Norman</p>
+        </div>
+
+        <form id="login-form" class="w-full max-w-[320px] space-y-10 fade-in-element opacity-0 translate-y-8" onsubmit="handleLogin(event)">
+            <div class="group relative">
+                <input type="text" required class="w-full bg-transparent border-b border-white/10 py-3 text-white outline-none focus:border-brand-gold transition-all duration-500 font-serif text-xl text-center placeholder-transparent peer" id="access_id" placeholder="Client ID">
+                <label for="access_id" class="absolute left-0 right-0 text-center -top-4 text-brand-gold text-[9px] uppercase tracking-[0.2em] transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-white/20 peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-brand-gold peer-focus:text-[9px]" data-i18n="label_id">ID</label>
+            </div>
+
+            <div class="group relative">
+                <input type="password" required class="w-full bg-transparent border-b border-white/10 py-3 text-white outline-none focus:border-brand-gold transition-all duration-500 font-serif text-xl text-center placeholder-transparent peer" id="access_key" placeholder="Passkey">
+                <label for="access_key" class="absolute left-0 right-0 text-center -top-4 text-brand-gold text-[9px] uppercase tracking-[0.2em] transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-white/20 peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-brand-gold peer-focus:text-[9px]" data-i18n="label_pass">Key</label>
+            </div>
+
+            <div class="pt-8">
+                <button type="submit" id="submit-btn" class="magnetic-btn w-full py-4 rounded-full border border-white/10 text-white/80 hover:bg-white hover:text-brand-dark transition duration-700 uppercase tracking-[0.25em] text-[10px] font-bold flex items-center justify-center gap-3">
+                    <span data-i18n="btn_enter">Enter</span>
+                </button>
+            </div>
+            
+            <div class="text-center">
+                <a href="#" class="text-[9px] text-white/10 hover:text-brand-gold transition duration-300 uppercase tracking-widest" data-i18n="forgot_link">Help</a>
+            </div>
+        </form>
+
+    </main>
+
+    <script src="layout.js"></script>
+    
+    <script>
+        const loginTranslations = {
+            en: {
+                back_to_site: "Back",
+                login_title: "Private Access",
+                login_subtitle: "Craftsman Norman",
+                label_id: "Identity",
+                label_pass: "Passkey",
+                btn_enter: "Unlock",
+                btn_verifying: "Verifying...",
+                btn_success: "Authorized",
+                btn_error: "Access Denied",
+                forgot_link: "Issue with access?"
+            },
+            th: {
+                back_to_site: "กลับ",
+                login_title: "เข้าสู่ระบบ",
+                login_subtitle: "Craftsman Norman",
+                label_id: "รหัสสมาชิก",
+                label_pass: "รหัสผ่าน",
+                btn_enter: "เข้าใช้งาน",
+                btn_verifying: "กำลังตรวจสอบ...",
+                btn_success: "ยืนยันสำเร็จ",
+                btn_error: "รหัสไม่ถูกต้อง",
+                forgot_link: "ติดปัญหาการใช้งาน?"
+            }
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const currentLang = localStorage.getItem('lang') || 'en';
+            applyLoginPageLang(currentLang);
+            
+            // Entrance Animation
+            gsap.to(".fade-in-element", {
+                y: 0,
+                x: 0,
+                opacity: 1,
+                duration: 1.5,
+                stagger: 0.2, 
+                ease: "power2.out",
+                delay: 0.3
+            });
+        });
+
+        function applyLoginPageLang(lang) {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if(loginTranslations[lang] && loginTranslations[lang][key]) {
+                    el.innerText = loginTranslations[lang][key];
+                }
+            });
+        }
+
+        // --- REAL DEMO LOGIN LOGIC ---
+        function handleLogin(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            const idInput = document.getElementById('access_id').value;
+            const passInput = document.getElementById('access_key').value;
+            const lang = localStorage.getItem('lang') || 'en';
+            
+            // *** CONFIG: Set your Demo Credentials Here ***
+            const validID = "VIP01";
+            const validPass = "1234";
+
+            // Phase 1: Processing (Spinning)
+            btn.innerHTML = `<span class="spinner"></span>`;
+            btn.classList.add('bg-white/5', 'cursor-not-allowed', 'border-transparent');
+            
+            setTimeout(() => {
+                // Check Credentials
+                if (idInput === validID && passInput === validPass) {
+                    // --- SUCCESS ---
+                    btn.innerHTML = `<span class="text-brand-dark">${loginTranslations[lang].btn_success}</span>`;
+                    btn.classList.remove('bg-white/5', 'bg-white', 'text-white/80', 'border-white/10');
+                    btn.classList.add('bg-brand-gold', 'text-white', 'border-brand-gold');
+                    
+                    // Redirect to Dashboard
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 800);
+
+                } else {
+                    // --- ERROR ---
+                    btn.innerHTML = `<span class="text-red-400">${loginTranslations[lang].btn_error}</span>`;
+                    btn.classList.remove('bg-white/5');
+                    btn.classList.add('border-red-500', 'text-red-400');
+                    
+                    // Shake Animation
+                    gsap.fromTo("#login-form", {x: -10}, {x: 10, duration: 0.1, repeat: 3, yoyo: true});
+
+                    // Reset Button
+                    setTimeout(() => {
+                        btn.innerHTML = `<span data-i18n="btn_enter">${loginTranslations[lang].btn_enter}</span>`;
+                        btn.classList.remove('border-red-500', 'text-red-400', 'cursor-not-allowed');
+                        btn.classList.add('border-white/10', 'text-white/80');
+                        // Re-apply cursor check
+                        btn.classList.remove('bg-brand-gold', 'text-white', 'border-brand-gold');
+                    }, 2000);
+                }
+            }, 1500); // Fake loading delay
+        }
+    </script>
+</body>
+</html>
