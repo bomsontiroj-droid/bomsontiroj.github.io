@@ -1,4 +1,4 @@
-// layout.js - Updated Link for Client Access
+// layout.js - Final Fixed: Chat Toggle, Added Socials, Clean Navbar, Translated Modal
 
 const globalConfig = {
     email: "craftmannorman.official@hotmail.com",
@@ -41,29 +41,29 @@ function injectLayout() {
         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-white rounded-[32px] p-8 md:p-12 shadow-2xl scale-95 opacity-0 transition-all duration-500 modal-content">
             <div class="flex justify-between items-center mb-8">
                 <div>
-                    <span class="text-brand-gold text-[10px] uppercase tracking-widest font-bold block mb-1">Start a Project</span>
-                    <h3 class="text-3xl font-serif text-brand-dark">Inquiry</h3>
+                    <span class="text-brand-gold text-[10px] uppercase tracking-widest font-bold block mb-1" data-i18n="modal_subtitle">Start a Project</span>
+                    <h3 class="text-3xl font-serif text-brand-dark" data-i18n="modal_title">Inquiry</h3>
                 </div>
                 <button onclick="toggleInquiry()" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-brand-dark hover:text-white transition"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <form class="space-y-6" onsubmit="event.preventDefault(); alert('Thank you. We will contact you shortly.'); toggleInquiry();">
                 <div class="space-y-1">
-                    <label class="text-xs uppercase tracking-widest text-gray-500">Name</label>
+                    <label class="text-xs uppercase tracking-widest text-gray-500" data-i18n="form_name">Name</label>
                     <input type="text" class="w-full border-b border-gray-200 py-2 outline-none focus:border-brand-gold transition font-serif text-xl" placeholder="Your Name" required>
                 </div>
                 <div class="space-y-1">
-                    <label class="text-xs uppercase tracking-widest text-gray-500">Email</label>
+                    <label class="text-xs uppercase tracking-widest text-gray-500" data-i18n="form_email">Email</label>
                     <input type="email" class="w-full border-b border-gray-200 py-2 outline-none focus:border-brand-gold transition font-serif text-xl" placeholder="email@example.com" required>
                 </div>
                 <div class="space-y-1">
-                    <label class="text-xs uppercase tracking-widest text-gray-500">Interest</label>
+                    <label class="text-xs uppercase tracking-widest text-gray-500" data-i18n="form_interest">Interest</label>
                     <select class="w-full border-b border-gray-200 py-2 outline-none focus:border-brand-gold transition font-serif text-xl bg-transparent">
-                        <option>Architecture Design</option>
-                        <option>Interior & Furniture</option>
-                        <option>Turnkey Construction</option>
+                        <option data-i18n="opt_arch">Architecture Design</option>
+                        <option data-i18n="opt_interior">Interior & Furniture</option>
+                        <option data-i18n="opt_turnkey">Turnkey Construction</option>
                     </select>
                 </div>
-                <button type="submit" class="w-full py-4 bg-brand-dark text-white rounded-full hover:bg-brand-gold transition duration-300 font-bold tracking-widest text-xs uppercase mt-4 magnetic-btn">Send Request</button>
+                <button type="submit" class="w-full py-4 bg-brand-dark text-white rounded-full hover:bg-brand-gold transition duration-300 font-bold tracking-widest text-xs uppercase mt-4 magnetic-btn" data-i18n="btn_send">Send Request</button>
             </form>
         </div>
     </div>
@@ -122,15 +122,18 @@ function injectLayout() {
         </div>
     </div>
 
-    <div id="chat-container" class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 group hover:z-[60] transition-opacity duration-500 ease-out">
+    <div id="chat-container" class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 group transition-opacity duration-500 ease-out">
         <div id="chat-options" class="flex flex-col gap-3 transition-all duration-500 ease-[0.34, 1.56, 0.64, 1] opacity-0 translate-y-10 scale-75 origin-bottom group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100 pointer-events-none group-hover:pointer-events-auto">
             <a href="${globalConfig.chat.messenger}" target="_blank" class="w-12 h-12 bg-[#0084FF] rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition transform magnetic-btn" title="Messenger"><i class="fa-brands fa-facebook-messenger"></i></a>
             <a href="${globalConfig.chat.line}" target="_blank" class="w-12 h-12 bg-[#06C755] rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition transform magnetic-btn" title="Line"><i class="fa-brands fa-line"></i></a>
+            <a href="${globalConfig.chat.whatsapp}" target="_blank" class="w-12 h-12 bg-[#25D366] rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition transform magnetic-btn" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="${globalConfig.chat.wechat}" target="_blank" class="w-12 h-12 bg-[#09B83E] rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition transform magnetic-btn" title="WeChat"><i class="fa-brands fa-weixin"></i></a>
         </div>
-        <button class="magnetic-btn w-14 h-14 bg-brand-dark rounded-full flex items-center justify-center text-brand-gold shadow-xl transition-all duration-300 ease-out transform group-hover:scale-110 relative border border-white/10">
-            <i class="fa-solid fa-comments text-xl transition-all duration-300 group-hover:opacity-0 absolute"></i>
-            <i class="fa-solid fa-xmark text-xl transition-all duration-300 opacity-0 group-hover:opacity-100 absolute"></i>
-            <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse border-2 border-white group-hover:hidden"></span>
+        
+        <button onclick="toggleChat()" class="magnetic-btn w-14 h-14 bg-brand-dark rounded-full flex items-center justify-center text-brand-gold shadow-xl transition-all duration-300 ease-out transform group-hover:scale-110 relative border border-white/10">
+            <i class="fa-solid fa-comments text-xl transition-all duration-300 absolute icon-chat"></i>
+            <i class="fa-solid fa-xmark text-xl transition-all duration-300 opacity-0 absolute icon-close"></i>
+            <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse border-2 border-white group-hover:hidden notification-dot"></span>
         </button>
     </div>
 
@@ -142,7 +145,7 @@ function injectLayout() {
                     <h2 class="text-5xl md:text-8xl leading-tight font-serif text-white cursor-default hover:text-brand-gold transition duration-500" data-i18n="footer_tagline">
                         Let's Craft<br>Your Dream
                     </h2>
-                    <button onclick="toggleInquiry()" class="mt-8 px-8 py-3 rounded-full border border-white/20 text-white hover:bg-brand-gold hover:border-brand-gold transition duration-300 magnetic-btn">
+                    <button onclick="toggleInquiry()" class="mt-8 px-8 py-3 rounded-full border border-white/20 text-white hover:bg-brand-gold hover:border-brand-gold transition duration-300 magnetic-btn" data-i18n="modal_subtitle">
                         Start a Project
                     </button>
                 </div>
@@ -186,6 +189,15 @@ function injectStyles() {
         #inquiry-modal.active { display: block; }
         #inquiry-modal.active .modal-content { opacity: 1; transform: translate(-50%, -50%) scale(1); }
         ::selection { background: #ab9367; color: white; }
+        
+        #chat-container.active #chat-options { 
+            opacity: 1; 
+            transform: translateY(0) scale(1); 
+            pointer-events: auto; 
+        }
+        #chat-container.active .icon-chat { opacity: 0; }
+        #chat-container.active .icon-close { opacity: 1; }
+        #chat-container.active .notification-dot { display: none; }
     `;
     document.head.appendChild(style);
 }
@@ -254,6 +266,11 @@ function toggleInquiry() {
     }
 }
 
+function toggleChat() {
+    const chatContainer = document.getElementById('chat-container');
+    chatContainer.classList.toggle('active');
+}
+
 function pageTransitionIn() {
     const c1 = document.getElementById('trans-curtain-1');
     const c2 = document.getElementById('trans-curtain-2');
@@ -275,7 +292,7 @@ function navTo(e, type, shouldToggleMenu = false) {
         'works':     { id: 'works-section',    url: 'portfolio.html' }, 
         'journal':   { id: 'journal-section',  url: 'journal.html' },
         'contact':   { id: 'footer',           url: '#footer' },
-        'login':     { url: 'login.html' } // Added this line
+        'login':     { url: 'login.html' }
     };
     const target = mapping[type];
     if (!target) return;
@@ -333,7 +350,18 @@ const translations = {
         footer_tagline: "Let's Craft<br>Your Dream",
         label_contact: "Contact", label_studio: "Studio", label_follow: "Follow Us", label_privacy: "Privacy", label_terms: "Terms",
         journal_title: "Journal",
-        nav_client: "Client Access"
+        nav_client: "Client Access",
+        
+        // MODAL & INQUIRY
+        modal_subtitle: "Start a Project",
+        modal_title: "Inquiry",
+        form_name: "Name",
+        form_email: "Email",
+        form_interest: "Interest",
+        opt_arch: "Architecture Design",
+        opt_interior: "Interior & Furniture",
+        opt_turnkey: "Turnkey Construction",
+        btn_send: "Send Request"
     },
     th: {
         nav_home: "หน้าหลัก", nav_story: "เรื่องราวของเรา", nav_portfolio: "ผลงาน", nav_services: "บริการ", nav_contact: "ติดต่อ",
@@ -341,7 +369,18 @@ const translations = {
         footer_tagline: "มาร่วมสาน<br>ฝันของคุณ",
         label_contact: "ติดต่อเรา", label_studio: "สตูดิโอ", label_follow: "ติดตามเรา", label_privacy: "นโยบายความเป็นส่วนตัว", label_terms: "เงื่อนไขการใช้บริการ",
         journal_title: "บทความ",
-        nav_client: "เข้าสู่ระบบลูกค้า"
+        nav_client: "เข้าสู่ระบบลูกค้า",
+
+        // MODAL & INQUIRY THAI
+        modal_subtitle: "เริ่มต้นโครงการ",
+        modal_title: "สอบถามข้อมูล",
+        form_name: "ชื่อ",
+        form_email: "อีเมล",
+        form_interest: "เรื่องที่สนใจ",
+        opt_arch: "ออกแบบสถาปัตยกรรม",
+        opt_interior: "ตกแต่งภายในและเฟอร์นิเจอร์",
+        opt_turnkey: "ก่อสร้างและเทิร์นคีย์",
+        btn_send: "ส่งข้อความ"
     }
 };
 
