@@ -36,11 +36,9 @@
 
     <style>
         body { background-color: #F5F5F7; font-family: 'Manrope', 'Noto Sans Thai Loopless', sans-serif; color: #1d1d1f; overflow-x: hidden; }
-        h1, h2, h3, .font-serif { font-family: 'Italiana', 'Noto Serif Thai', serif; }
+        h1, h2, h3, h4, .font-serif { font-family: 'Italiana', 'Noto Serif Thai', serif; }
         body.lang-th h1, body.lang-th h2 { line-height: 1.2; }
         
-        .text-shadow-strong { text-shadow: 0 4px 30px rgba(0,0,0,0.8), 0 1px 3px rgba(0,0,0,0.5); }
-
         /* Custom Cursor */
         @media (hover: none) { body { cursor: auto; } #custom-cursor { display: none; } }
         #custom-cursor { 
@@ -53,16 +51,10 @@
         #custom-cursor.hovered { width: 40px; height: 40px; background-color: rgba(171, 147, 103, 0.2); border: 1px solid #ab9367; }
 
         /* Rounding & Parallax */
-        #story-hero, .rounded-section { 
+        #hero-container, .rounded-section { 
             clip-path: inset(0 round 32px); 
             transition: clip-path 1s cubic-bezier(0.77, 0, 0.175, 1); 
         }
-        .parallax-bg {
-            background-attachment: fixed; background-position: center; background-size: cover;
-        }
-        
-        /* Sticky Section Logic */
-        .sticky-container { position: relative; height: 100%; }
     </style>
 </head>
 <body oncontextmenu="return false"> 
@@ -71,181 +63,176 @@
 
     <main class="pt-24 px-4 pb-4">
         
-        <header id="story-hero" class="relative w-full max-w-[1600px] mx-auto h-[85vh] mb-24 bg-black shadow-2xl overflow-hidden">
-            <div class="absolute inset-0">
-                <img src="https://images.unsplash.com/photo-1617104424032-b9bd6972d0e4?q=80&w=2000" class="w-full h-full object-cover opacity-60 parallax-bg">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-            </div>
-            
-            <div class="absolute bottom-0 left-0 w-full p-6 md:p-12 z-20">
-                <div class="flex flex-col md:flex-row items-end justify-between">
-                    <div>
-                        <span class="text-brand-gold text-xs uppercase tracking-[0.3em] font-bold mb-4 block" data-i18n="story_subtitle">The Philosophy</span>
-                        <h1 class="text-white text-6xl md:text-9xl font-serif leading-[0.9] tracking-tight mb-8 md:mb-0 drop-shadow-lg text-shadow-strong" data-i18n="story_hero_title">
-                            The Soul of <br><span class="italic text-brand-gold">Craftsman.</span>
+        <header class="relative w-full max-w-[1600px] mx-auto h-[85vh] mb-24">
+            <div id="hero-container" class="w-full h-full relative overflow-hidden bg-black shadow-2xl">
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2000" class="absolute inset-0 w-full h-full object-cover opacity-60 parallax-img">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                <div class="absolute bottom-0 left-0 w-full p-6 md:p-16 z-20">
+                    <div class="max-w-4xl">
+                        <span class="text-brand-gold text-xs uppercase tracking-[0.3em] font-bold mb-6 block fade-in" data-i18n="story_subtitle">The Untold Story</span>
+                        <h1 class="text-white text-6xl md:text-9xl font-serif leading-[0.9] tracking-tight mb-8 drop-shadow-lg fade-in" data-i18n="story_hero_title">
+                            It started with a<br><span class="italic text-brand-gold">Question.</span>
                         </h1>
-                    </div>
-                    <div class="backdrop-blur-xl bg-white/10 p-8 rounded-[32px] border border-white/20 max-w-lg shadow-lg">
-                         <p class="text-white/95 text-sm md:text-base font-sans leading-relaxed" data-i18n="story_desc">
-                            At Craftsman Norman, we believe that true luxury lies in the details you feel, not just the ones you see.
-                        </p>
                     </div>
                 </div>
             </div>
         </header>
 
-        <section class="max-w-[1200px] mx-auto mb-32 px-6 text-center md:text-left">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                <div>
-                    <h2 class="text-4xl md:text-6xl font-serif text-brand-dark leading-tight" data-i18n="quote_main">
-                        "We don't just build space.<br>We craft the <span class="italic text-brand-gold">atmosphere.</span>"
-                    </h2>
+        <section class="max-w-[1600px] mx-auto mb-32 px-6 md:px-16">
+            <div class="flex flex-col md:flex-row gap-16 md:gap-32">
+                <div class="w-full md:w-1/2 relative h-[60vh] md:h-[80vh] md:sticky md:top-24">
+                    <div class="w-full h-full rounded-[32px] overflow-hidden shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=1000" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-1000">
+                        <div class="absolute bottom-8 left-8 bg-white/90 backdrop-blur px-4 py-2 rounded-full">
+                            <span class="text-[10px] uppercase tracking-widest text-brand-dark font-bold">2015: The First Sketch</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="space-y-8">
-                    <p class="text-brand-dark/70 text-lg leading-relaxed" data-i18n="story_p1">
-                        Our journey began with a simple obsession: to bridge the gap between architectural structure and interior emotion. We challenge the ordinary, pushing the boundaries of materials to create spaces that are visually stunning and spiritually grounding.
-                    </p>
-                    <div class="w-24 h-[1px] bg-brand-gold"></div>
+                <div class="w-full md:w-1/2 flex flex-col justify-center py-12 md:py-32 space-y-24">
+                    <div class="fade-up">
+                        <h2 class="text-4xl md:text-5xl font-serif text-brand-dark mb-8 leading-tight" data-i18n="origin_title_1">Why must luxury be uncomfortable?</h2>
+                        <p class="text-brand-dark/60 text-lg leading-relaxed font-sans" data-i18n="origin_desc_1">
+                            Ten years ago, we walked into a multimillion-dollar penthouse. It was breathtakingly beautiful, yet impossibly cold. You couldn't touch anything. You couldn't relax. It was a museum, not a home.
+                        </p>
+                    </div>
+                    <div class="fade-up">
+                        <h2 class="text-4xl md:text-5xl font-serif text-brand-dark mb-8 leading-tight" data-i18n="origin_title_2">The Rebellion.</h2>
+                        <p class="text-brand-dark/60 text-lg leading-relaxed font-sans" data-i18n="origin_desc_2">
+                            That day, Craftsman Norman was born. Not as a design firm, but as a rebellion against "showroom living". We vowed to create spaces that embrace you, materials that warm to your touch, and beauty that serves life, not the other way around.
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="relative w-full max-w-[1600px] mx-auto mb-24 bg-[#1d1d1f] text-white rounded-[32px] overflow-hidden p-8 md:p-12">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
-                <div class="hidden md:block relative">
-                    <div class="sticky top-32">
-                        <span class="text-brand-gold uppercase tracking-[0.3em] text-xs mb-4 block" data-i18n="milestone_label">Our Vision</span>
-                        <h2 class="text-5xl md:text-7xl font-serif leading-none" data-i18n="milestone_title">The<br>Manifesto</h2>
+        <section class="w-full bg-[#1d1d1f] py-32 md:py-48 relative overflow-hidden rounded-[32px] mb-32 mx-auto max-w-[1600px]">
+            <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-brand-gold/5 rounded-full blur-[120px] pointer-events-none"></div>
+            <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
+                <i class="fa-solid fa-quote-left text-4xl text-brand-gold/30 mb-12 block"></i>
+                <h2 class="text-4xl md:text-7xl font-serif text-white leading-tight mb-16" data-i18n="obsession_quote">
+                    "We spent <span class="text-brand-gold">300 hours</span> selecting a single slab of marble. Because we know you will look at it for a lifetime."
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-left border-t border-white/10 pt-12">
+                    <div>
+                        <span class="text-brand-gold text-4xl font-serif mb-4 block">01</span>
+                        <h4 class="text-white text-xl font-serif mb-2" data-i18n="obs_1_title">Uncompromising</h4>
+                        <p class="text-white/50 text-sm" data-i18n="obs_1_desc">We reject 90% of materials that don't meet our tactile standards.</p>
+                    </div>
+                    <div>
+                        <span class="text-brand-gold text-4xl font-serif mb-4 block">02</span>
+                        <h4 class="text-white text-xl font-serif mb-2" data-i18n="obs_2_title">Timelessness</h4>
+                        <p class="text-white/50 text-sm" data-i18n="obs_2_desc">Designing for the next 20 years, not the next Instagram trend.</p>
+                    </div>
+                    <div>
+                        <span class="text-brand-gold text-4xl font-serif mb-4 block">03</span>
+                        <h4 class="text-white text-xl font-serif mb-2" data-i18n="obs_3_title">Soulful</h4>
+                        <p class="text-white/50 text-sm" data-i18n="obs_3_desc">Every corner must evoke a feeling, not just fill a space.</p>
                     </div>
                 </div>
-                <div class="md:hidden mb-4">
-                    <span class="text-brand-gold uppercase tracking-[0.3em] text-xs mb-4 block" data-i18n="milestone_label">Our Vision</span>
-                    <h2 class="text-5xl font-serif leading-none" data-i18n="milestone_title">The Manifesto</h2>
+            </div>
+        </section>
+
+        <section class="py-24 max-w-[1600px] mx-auto mb-32 px-6">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-24">
+                
+                <div class="md:col-span-4">
+                    <span class="text-brand-gold text-xs uppercase tracking-[0.3em] font-bold block mb-6" data-i18n="esg_label">Our Commitment</span>
+                    <h2 class="text-4xl md:text-5xl font-serif text-brand-dark leading-tight mb-6" data-i18n="esg_title">
+                        Conscious<br>Luxury.
+                    </h2>
+                    <p class="text-brand-dark/60 text-sm leading-relaxed font-sans" data-i18n="esg_desc">
+                        We believe that true luxury must be sustainable. It is not enough to create beauty; we must also preserve the world that inspires it.
+                    </p>
                 </div>
-                <div class="space-y-16 md:space-y-24">
-                    <div class="group border-b border-white/10 pb-12">
-                        <span class="text-brand-gold font-serif text-4xl md:text-6xl opacity-50 group-hover:opacity-100 transition duration-500 block mb-4">01</span>
-                        <h3 class="text-2xl md:text-3xl font-serif mb-3" data-i18n="mile_2025_title">Authentic Craftsmanship</h3>
-                        <p class="text-white/60 text-base leading-relaxed" data-i18n="mile_2025_desc">
-                            Reviving the lost art of detailing. In a world of mass production, we choose the path of bespoke creation.
-                        </p>
-                    </div>
-                    <div class="group border-b border-white/10 pb-12">
-                        <span class="text-brand-gold font-serif text-4xl md:text-6xl opacity-50 group-hover:opacity-100 transition duration-500 block mb-4">02</span>
-                        <h3 class="text-2xl md:text-3xl font-serif mb-3" data-i18n="mile_2026_title">Global Aesthetics</h3>
-                        <p class="text-white/60 text-base leading-relaxed" data-i18n="mile_2026_desc">
-                            Merging Thai heritage with international design standards. Creating a visual language that transcends borders.
+
+                <div class="md:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div class="group">
+                        <div class="w-12 h-12 rounded-full border border-brand-dark/10 flex items-center justify-center mb-6 group-hover:bg-brand-dark group-hover:text-brand-gold transition duration-500">
+                            <i class="fa-solid fa-leaf"></i>
+                        </div>
+                        <h4 class="text-xl font-serif text-brand-dark mb-3" data-i18n="esg_1_title">Regenerative Design</h4>
+                        <p class="text-brand-dark/50 text-xs leading-relaxed" data-i18n="esg_1_desc">
+                            Prioritizing materials that heal the environment. From carbon-neutral concrete to reclaimed teak, every element is chosen for its low impact.
                         </p>
                     </div>
                     <div class="group">
-                        <span class="text-brand-gold font-serif text-4xl md:text-6xl opacity-50 group-hover:opacity-100 transition duration-500 block mb-4">03</span>
-                        <h3 class="text-2xl md:text-3xl font-serif mb-3" data-i18n="mile_future_title">Sustainable Future</h3>
-                        <p class="text-white/60 text-base leading-relaxed" data-i18n="mile_future_desc">
-                            Our goal is to become a net-zero organization. Designing spaces that inspire, heal, and empower.
+                        <div class="w-12 h-12 rounded-full border border-brand-dark/10 flex items-center justify-center mb-6 group-hover:bg-brand-dark group-hover:text-brand-gold transition duration-500">
+                            <i class="fa-solid fa-hands-holding-circle"></i>
+                        </div>
+                        <h4 class="text-xl font-serif text-brand-dark mb-3" data-i18n="esg_2_title">Supporting Artisans</h4>
+                        <p class="text-brand-dark/50 text-xs leading-relaxed" data-i18n="esg_2_desc">
+                            We champion local Thai craftsmanship. By partnering with village artisans, we keep ancient techniques alive and thriving.
+                        </p>
+                    </div>
+                    <div class="group">
+                        <div class="w-12 h-12 rounded-full border border-brand-dark/10 flex items-center justify-center mb-6 group-hover:bg-brand-dark group-hover:text-brand-gold transition duration-500">
+                            <i class="fa-solid fa-scale-balanced"></i>
+                        </div>
+                        <h4 class="text-xl font-serif text-brand-dark mb-3" data-i18n="esg_3_title">Transparent Integrity</h4>
+                        <p class="text-brand-dark/50 text-xs leading-relaxed" data-i18n="esg_3_desc">
+                            Honesty is our most valuable currency. We operate with absolute transparency in costs, treating your investment as our own.
+                        </p>
+                    </div>
+                    <div class="group">
+                        <div class="w-12 h-12 rounded-full border border-brand-dark/10 flex items-center justify-center mb-6 group-hover:bg-brand-dark group-hover:text-brand-gold transition duration-500">
+                            <i class="fa-solid fa-infinity"></i>
+                        </div>
+                        <h4 class="text-xl font-serif text-brand-dark mb-3" data-i18n="esg_4_title">Legacy Building</h4>
+                        <p class="text-brand-dark/50 text-xs leading-relaxed" data-i18n="esg_4_desc">
+                            We don't build for today. We build for the next generation. Structures designed to age beautifully and last for 100 years.
                         </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="max-w-[1600px] mx-auto mb-24 px-6">
-            <div class="text-center mb-16">
-                <span class="text-brand-gold uppercase tracking-[0.3em] text-xs mb-4 block" data-i18n="values_label">Our DNA</span>
-                <h2 class="text-4xl md:text-5xl font-serif text-brand-dark" data-i18n="values_title">Core Values</h2>
+        <section id="leadership" class="max-w-[1600px] mx-auto mb-32 px-6">
+            <div class="text-center mb-20">
+                <span class="text-brand-gold uppercase tracking-[0.3em] text-xs mb-4 block" data-i18n="team_label">The Artisans</span>
+                <h2 class="text-4xl md:text-6xl font-serif text-brand-dark" data-i18n="team_title">Behind the Masterpiece</h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white rounded-[32px] p-10 text-center border border-brand-dark/5 hover:shadow-xl transition duration-500 group magnetic-btn">
-                    <div class="text-6xl font-serif text-brand-dark/10 mb-6 group-hover:text-brand-gold transition duration-500">01</div>
-                    <h3 class="text-2xl font-serif mb-4 text-brand-dark" data-i18n="val_1_title">Refined Luxury</h3>
-                    <p class="text-brand-dark/60 text-sm leading-relaxed" data-i18n="val_1_desc">Elegance that speaks through subtlety. Luxury whispers, it doesn't shout.</p>
-                </div>
-
-                <div class="bg-white rounded-[32px] p-10 text-center border border-brand-dark/5 hover:shadow-xl transition duration-500 group magnetic-btn">
-                    <div class="text-6xl font-serif text-brand-dark/10 mb-6 group-hover:text-brand-gold transition duration-500">02</div>
-                    <h3 class="text-2xl font-serif mb-4 text-brand-dark" data-i18n="val_2_title">Multidisciplinary</h3>
-                    <p class="text-brand-dark/60 text-sm leading-relaxed" data-i18n="val_2_desc">Merging architecture, interior, and art into one cohesive experience.</p>
-                </div>
-
-                <div class="bg-white rounded-[32px] p-10 text-center border border-brand-dark/5 hover:shadow-xl transition duration-500 group magnetic-btn">
-                    <div class="text-6xl font-serif text-brand-dark/10 mb-6 group-hover:text-brand-gold transition duration-500">03</div>
-                    <h3 class="text-2xl font-serif mb-4 text-brand-dark" data-i18n="val_3_title">Timelessness</h3>
-                    <p class="text-brand-dark/60 text-sm leading-relaxed" data-i18n="val_3_desc">Designs that endure beyond trends. Relevant and inspiring for decades.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="leadership" class="max-w-[1600px] mx-auto mb-24 px-6">
-            <div class="text-center mb-16">
-                <span class="text-brand-gold uppercase tracking-[0.3em] text-xs mb-4 block" data-i18n="team_label">The Team</span>
-                <h2 class="text-4xl md:text-5xl font-serif text-brand-dark" data-i18n="team_title">Leadership</h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="h-[550px] relative rounded-[32px] overflow-hidden group cursor-pointer border border-brand-dark/5 shadow-md magnetic-btn">
-                    <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=1000" class="absolute inset-0 w-full h-full object-cover transition duration-[1.5s] group-hover:scale-110 grayscale group-hover:grayscale-0">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
-                    
-                    <div class="absolute bottom-6 left-6 right-6">
-                        <div class="backdrop-blur-xl bg-white/10 p-6 rounded-[24px] border border-white/20 shadow-lg flex flex-col">
-                            <span class="text-white text-xs uppercase tracking-widest font-bold mb-2 block" data-i18n="role_ceo">CHIEF EXECUTIVE OFFICER</span>
-                            <h4 class="text-2xl font-serif text-white mb-1 leading-tight" data-i18n="name_ceo">Miss Chaowadee Sontiroj</h4>
-                            <p class="text-white text-xs italic mt-2 opacity-80" data-i18n="quote_ceo">"Vision is the art of seeing what is invisible to others."</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="h-[550px] relative rounded-[32px] overflow-hidden group cursor-pointer border border-brand-dark/5 shadow-md magnetic-btn">
-                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1000" class="absolute inset-0 w-full h-full object-cover transition duration-[1.5s] group-hover:scale-110 grayscale group-hover:grayscale-0">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
-                    
-                    <div class="absolute bottom-6 left-6 right-6">
-                        <div class="backdrop-blur-xl bg-white/10 p-6 rounded-[24px] border border-white/20 shadow-lg flex flex-col">
-                            <span class="text-white text-xs uppercase tracking-widest font-bold mb-2 block" data-i18n="role_cfo">CHIEF FINANCIAL OFFICER</span>
-                            <h4 class="text-2xl font-serif text-white mb-1 leading-tight" data-i18n="name_cfo">Mr. Chonbodee Sontiroj</h4>
-                            <p class="text-white text-xs italic mt-2 opacity-80" data-i18n="quote_cfo">"Stability creates the freedom to innovate."</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="h-[550px] relative rounded-[32px] overflow-hidden group cursor-pointer border border-brand-dark/5 shadow-md magnetic-btn">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000" class="absolute inset-0 w-full h-full object-cover transition duration-[1.5s] group-hover:scale-110 grayscale group-hover:grayscale-0">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
-                    
-                    <div class="absolute bottom-6 left-6 right-6">
-                        <div class="backdrop-blur-xl bg-white/10 p-6 rounded-[24px] border border-white/20 shadow-lg flex flex-col">
-                            <span class="text-white text-xs uppercase tracking-widest font-bold mb-2 block" data-i18n="role_cdo">CHIEF DESIGN OFFICER</span>
-                            <h4 class="text-2xl font-serif text-white mb-1 leading-tight" data-i18n="name_cdo">Mr. Reungchan Tedlek</h4>
-                            <p class="text-white text-xs italic mt-2 opacity-80" data-i18n="quote_cdo">"Design is intelligence made visible."</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <section class="max-w-7xl mx-auto mb-32 px-6 text-center">
-            <div class="relative py-12 border-t border-brand-dark/10">
-                <i class="fa-solid fa-quote-left text-4xl text-brand-gold/20 absolute top-0 left-0 md:-left-12"></i>
-                <h3 class="text-2xl md:text-4xl font-serif italic leading-relaxed mb-12 text-brand-dark" data-i18n="founders_quote">
-                    We founded Craftsman Norman with a single purpose: to bring the 'art of living' back to modern spaces. It's not just about design; it's about how you feel when you walk through the&nbsp;door.
-                </h3>
-                <i class="fa-solid fa-quote-right text-4xl text-brand-gold/20 absolute bottom-20 right-0 md:-right-12"></i>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 
-                <div class="flex flex-col md:flex-row justify-center gap-8 md:gap-20 pt-6">
-                    <div class="flex flex-col items-center">
-                        <span class="font-serif text-lg text-brand-dark font-bold">Chaowadee S.</span>
-                        <span class="text-[10px] uppercase tracking-widest text-brand-dark/50 mt-1">CO-FOUNDER & CEO</span>
+                <div class="group cursor-pointer magnetic-btn">
+                    <div class="h-[550px] relative overflow-hidden rounded-[4px] mb-6">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1000" class="absolute inset-0 w-full h-full object-cover transition duration-[1.5s] group-hover:scale-110 grayscale group-hover:grayscale-0 object-top">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
                     </div>
-                    <div class="flex flex-col items-center">
-                        <span class="font-serif text-lg text-brand-dark font-bold">Chonbodee S.</span>
-                        <span class="text-[10px] uppercase tracking-widest text-brand-dark/50 mt-1">CO-FOUNDER & CFO</span>
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <span class="font-serif text-lg text-brand-dark font-bold">Reungchan T.</span>
-                        <span class="text-[10px] uppercase tracking-widest text-brand-dark/50 mt-1">CO-FOUNDER & CDO</span>
+                    <div class="text-center">
+                        <span class="text-[10px] uppercase tracking-[0.2em] text-brand-gold font-bold block mb-1">CEO</span>
+                        <h4 class="text-2xl font-serif text-brand-dark mb-2" data-i18n="name_ceo">Chaowadee Sontiroj</h4>
+                        <span class="text-xs uppercase tracking-widest text-brand-dark/40 block mb-3" data-i18n="role_ceo_spiritual">The Visionary</span>
+                        <p class="text-brand-dark/60 text-xs italic max-w-xs mx-auto" data-i18n="desc_ceo">"True luxury is the absence of irritation."</p>
                     </div>
                 </div>
+
+                <div class="group cursor-pointer magnetic-btn">
+                    <div class="h-[550px] relative overflow-hidden rounded-[4px] mb-6">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1000" class="absolute inset-0 w-full h-full object-cover transition duration-[1.5s] group-hover:scale-110 grayscale group-hover:grayscale-0 object-top">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                    </div>
+                    <div class="text-center">
+                        <span class="text-[10px] uppercase tracking-[0.2em] text-brand-gold font-bold block mb-1">CFO</span>
+                        <h4 class="text-2xl font-serif text-brand-dark mb-2" data-i18n="name_cfo">Chonbodee Sontiroj</h4>
+                        <span class="text-xs uppercase tracking-widest text-brand-dark/40 block mb-3" data-i18n="role_cfo_spiritual">The Architect of Stability</span>
+                        <p class="text-brand-dark/60 text-xs italic max-w-xs mx-auto" data-i18n="desc_cfo">"Creativity needs a solid foundation to soar."</p>
+                    </div>
+                </div>
+
+                <div class="group cursor-pointer magnetic-btn">
+                    <div class="h-[550px] relative overflow-hidden rounded-[4px] mb-6">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000" class="absolute inset-0 w-full h-full object-cover transition duration-[1.5s] group-hover:scale-110 grayscale group-hover:grayscale-0 object-top">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                    </div>
+                    <div class="text-center">
+                        <span class="text-[10px] uppercase tracking-[0.2em] text-brand-gold font-bold block mb-1">CDO</span>
+                        <h4 class="text-2xl font-serif text-brand-dark mb-2" data-i18n="name_cdo">Reungchan Tedlek</h4>
+                        <span class="text-xs uppercase tracking-widest text-brand-dark/40 block mb-3" data-i18n="role_cdo_spiritual">The Perfectionist</span>
+                        <p class="text-brand-dark/60 text-xs italic max-w-xs mx-auto" data-i18n="desc_cdo">"God is in the details. So are we."</p>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -254,63 +241,82 @@
     </main>
 
     <script>
-        // Scroll Animation
         const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smooth: true });
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
         
-        // Page Translations
+        document.addEventListener("DOMContentLoaded", () => {
+            gsap.from(".fade-in", { y: 50, opacity: 0, duration: 1.5, stagger: 0.2, ease: "power3.out", delay: 0.5 });
+            gsap.to(".parallax-img", { yPercent: 20, ease: "none", scrollTrigger: { trigger: "#hero-container", start: "top top", end: "bottom top", scrub: true } });
+            gsap.utils.toArray('.fade-up').forEach(element => {
+                gsap.from(element, { y: 50, opacity: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: element, start: "top 85%", toggleActions: "play none none reverse" } });
+            });
+        });
+        
         const pageTranslations = {
             en: {
-                story_subtitle: "The Philosophy", 
-                story_hero_title: "The Soul of <br><span class='italic text-brand-gold'>Craftsman.</span>",
+                story_subtitle: "The Untold Story", 
+                story_hero_title: "It started with a<br><span class='italic text-brand-gold'>Question.</span>",
+                
+                origin_title_1: "Why must luxury be uncomfortable?",
+                origin_desc_1: "Ten years ago, we walked into a multimillion-dollar penthouse. It was breathtakingly beautiful, yet impossibly cold. You couldn't touch anything. You couldn't relax. It was a museum, not a home.",
+                origin_title_2: "The Rebellion.",
+                origin_desc_2: "That day, Craftsman Norman was born. Not as a design firm, but as a rebellion against \"showroom living\". We vowed to create spaces that embrace you, materials that warm to your touch, and beauty that serves life.",
 
-                story_desc: "At Craftsman Norman, we believe that true luxury lies in the details you feel, not just the ones you see.",
-                quote_main: "\"We don't just build space.<br>We craft the <span class='italic text-brand-gold'>atmosphere.</span>\"",
-                story_p1: "Our journey began with a simple obsession: to bridge the gap between architectural structure and interior emotion. We challenge the ordinary, pushing the boundaries of materials to create spaces that are visually stunning and spiritually grounding.",
+                intro_label: "The Manifesto",
+                intro_text: "\"In a world of speed, we choose the path of <span class='text-brand-gold italic'>slow perfection.</span><br>We don't just build spaces; we craft the backdrop for your legacy.\"",
+                btn_story: "Read Our Philosophy",
                 
-                milestone_label: "Our Vision", milestone_title: "The<br>Manifesto",
-                mile_2025_title: "Authentic Craftsmanship", mile_2025_desc: "Reviving the lost art of detailing. In a world of mass production, we choose the path of bespoke creation.",
-                mile_2026_title: "Global Aesthetics", mile_2026_desc: "Merging Thai heritage with international design standards. Creating a visual language that transcends borders.",
-                mile_future_title: "Sustainable Future", mile_future_desc: "Our ultimate goal is to become a net-zero organization. Designing spaces that not only inspire but also heal.",
+                obsession_quote: "\"We spent <span class='text-brand-gold'>300 hours</span> selecting a single slab of marble. Because we know you will look at it for a lifetime.\"",
+                obs_1_title: "Uncompromising", obs_1_desc: "We reject 90% of materials that don't meet our tactile standards.",
+                obs_2_title: "Timelessness", obs_2_desc: "Designing for the next 20 years, not the next Instagram trend.",
+                obs_3_title: "Soulful", obs_3_desc: "Every corner must evoke a feeling, not just fill a space.",
                 
-                values_label: "Our DNA", values_title: "Core Values",
-                val_1_title: "Refined Luxury", val_1_desc: "Elegance that speaks through subtlety. Luxury whispers, it doesn't shout.",
-                val_2_title: "Multidisciplinary", val_2_desc: "Merging architecture, interior, and art into one cohesive experience.",
-                val_3_title: "Timelessness", val_3_desc: "Designs that endure beyond trends. Relevant and inspiring for decades.",
-                
-                team_label: "The Team", team_title: "Leadership",
-                role_ceo: "CHIEF EXECUTIVE OFFICER", name_ceo: "Miss Chaowadee Sontiroj", quote_ceo: "\"Vision is the art of seeing what is invisible to others.\"",
-                role_cfo: "CHIEF FINANCIAL OFFICER", name_cfo: "Mr. Chonbodee Sontiroj", quote_cfo: "\"Stability creates the freedom to innovate.\"",
-                role_cdo: "CHIEF DESIGN OFFICER", name_cdo: "Mr. Reungchan Tedlek", quote_cdo: "\"Design is intelligence made visible.\"",
+                // ESG
+                esg_label: "Our Commitment",
+                esg_title: "Conscious<br>Luxury.",
+                esg_desc: "We believe that true luxury must be sustainable. It is not enough to create beauty; we must also preserve the world that inspires it.",
+                esg_1_title: "Regenerative Design", esg_1_desc: "Prioritizing materials that heal the environment. From carbon-neutral concrete to reclaimed teak, every element is chosen for its low impact.",
+                esg_2_title: "Supporting Artisans", esg_2_desc: "We champion local Thai craftsmanship. By partnering with village artisans, we keep ancient techniques alive and thriving.",
+                esg_3_title: "Transparent Integrity", esg_3_desc: "Honesty is our most valuable currency. We operate with absolute transparency, treating your investment as if it were our own.",
+                esg_4_title: "Legacy Building", esg_4_desc: "We don't build for today. We build for the next generation. Structures designed to age beautifully and last for 100 years.",
 
-                founders_quote: "We founded Craftsman Norman with a single purpose: to bring the 'art of living' back to modern spaces. It's not just about design; it's about how you feel when you walk through the&nbsp;door."
+                team_label: "The Artisans", team_title: "Behind the Masterpiece",
+                name_ceo: "Chaowadee Sontiroj", role_ceo_spiritual: "The Visionary", desc_ceo: "\"True luxury is the absence of irritation.\"",
+                name_cfo: "Chonbodee Sontiroj", role_cfo_spiritual: "The Architect of Stability", desc_cfo: "\"Creativity needs a solid foundation to soar.\"",
+                name_cdo: "Reungchan Tedlek", role_cdo_spiritual: "The Perfectionist", desc_cdo: "\"God is in the details. So are we.\""
             },
             th: {
-                story_subtitle: "ปรัชญาของเรา", 
-                // FIX: LINE BREAK CHANGE
-                story_hero_title: "จิตวิญญาณ<br>แห่ง <span class='italic text-brand-gold'>ช่างฝีมือ</span>",
+                story_subtitle: "เรื่องราวที่ไม่ได้เล่า", 
+                story_hero_title: "เริ่มต้นจาก<br><span class='italic text-brand-gold'>คำถามเดียว</span>",
+                
+                origin_title_1: "ทำไมความหรูหราต้องแลกมาด้วยความอึดอัด?",
+                origin_desc_1: "สิบปีก่อน เราเดินเข้าไปในเพนต์เฮาส์มูลค่ามหาศาล มันสวยงามจนแทบลืมหายใจ แต่มันกลับเย็นชา... คุณแตะต้องอะไรไม่ได้ คุณผ่อนคลายไม่ได้ มันคือพิพิธภัณฑ์ ไม่ใช่บ้าน",
+                origin_title_2: "การปฏิวัติ",
+                origin_desc_2: "วันนั้น Craftsman Norman จึงถือกำเนิดขึ้น ไม่ใช่ในฐานะบริษัทออกแบบ แต่ในฐานะการปฏิวัติเพื่อต่อต้าน 'การอยู่อาศัยแบบโชว์รูม' เราให้คำมั่นว่าจะสร้างพื้นที่ที่โอบกอดคุณ วัสดุที่อุ่นเมื่อสัมผัส และความงามที่รับใช้ชีวิต",
 
-                story_desc: "ที่ Craftsman Norman เราเชื่อว่าความหรูหราที่แท้จริงซ่อนอยู่ในรายละเอียดที่คุณสัมผัสได้ ไม่ใช่แค่สิ่งที่มองเห็น",
-                quote_main: "\"เราไม่ได้แค่สร้างพื้นที่<br>แต่เราสรรค์สร้าง <span class='italic text-brand-gold'>บรรยากาศ</span>\"",
-                story_p1: "การเดินทางของเราเริ่มต้นด้วยความตั้งใจที่เรียบง่าย: เพื่อเชื่อมโยงช่องว่างระหว่างโครงสร้างสถาปัตยกรรมและอารมณ์ความรู้สึก เราท้าทายความธรรมดา ผลักดันขอบเขตของวัสดุเพื่อสร้างพื้นที่ที่ไม่เพียงแต่สวยงามสะดุดตา แต่ยังช่วยยกระดับจิตใจ",
+                intro_label: "เจตจำนงของเรา",
+                intro_text: "\"ในโลกที่เร่งรีบ เราเลือกเส้นทางของ<span class='text-brand-gold italic'>ความสมบูรณ์แบบที่ละเมียดละไม</span><br>เราไม่ได้แค่สร้างพื้นที่ แต่เราสร้างฉากหลังสำหรับตำนานของคุณ\"",
+                btn_story: "อ่านปรัชญาของเรา",
                 
-                milestone_label: "วิสัยทัศน์ของเรา", milestone_title: "เจตจำนง<br>ของเรา",
-                mile_2025_title: "งานฝีมือที่แท้จริง", mile_2025_desc: "เรามุ่งมั่นที่จะฟื้นฟูศิลปะแห่งรายละเอียดที่หายไป ในโลกของการผลิตจำนวนมาก เราเลือกเส้นทางของการสร้างสรรค์งานฝีมือ",
-                mile_2026_title: "สุนทรียศาสตร์ระดับโลก", mile_2026_desc: "ผสมผสานมรดกทางวัฒนธรรมไทยเข้ากับมาตรฐานการออกแบบสากล สร้างภาษางานดีไซน์ที่ไร้พรมแดน",
-                mile_future_title: "อนาคตที่ยั่งยืน", mile_future_desc: "เป้าหมายสูงสุดของเราคือการเป็นองค์กร Net-Zero เรามุ่งมั่นออกแบบพื้นที่ที่ไม่เพียงสร้างแรงบันดาลใจ แต่ยังช่วยเยียวยา",
+                obsession_quote: "\"เราใช้เวลา <span class='text-brand-gold'>300 ชั่วโมง</span> ในการเลือกหินอ่อนเพียงแผ่นเดียว เพราะเรารู้ว่าคุณจะต้องมองมันไปตลอดชีวิต\"",
+                obs_1_title: "ไม่ประนีประนอม", obs_1_desc: "เราปฏิเสธวัสดุกว่า 90% ที่ไม่ผ่านมาตรฐานการสัมผัสของเรา",
+                obs_2_title: "เหนือกาลเวลา", obs_2_desc: "ออกแบบเพื่ออีก 20 ปีข้างหน้า ไม่ใช่เพื่อเทรนด์ Instagram ของเดือนนี้",
+                obs_3_title: "จิตวิญญาณ", obs_3_desc: "ทุกมุมต้องปลุกความรู้สึก ไม่ใช่แค่เติมเต็มพื้นที่ว่าง",
                 
-                values_label: "ดีเอ็นเอของเรา", values_title: "ค่านิยมหลัก",
-                val_1_title: "ความหรูหราที่ประณีต", val_1_desc: "ความสง่างามที่สื่อสารผ่านความเรียบง่าย เราเชื่อว่าความหรูหราที่แท้จริงนั้นไม่ตะโกน แต่กระซิบ",
-                val_2_title: "สหสาขาวิชาชีพ", val_2_desc: "ผสมผสานสถาปัตยกรรม การตกแต่งภายใน และศิลปะ ให้เป็นประสบการณ์เดียวกัน",
-                val_3_title: "เหนือกาลเวลา", val_3_desc: "งานออกแบบที่ยั่งยืนเหนือกระแสแฟชั่น เราสร้างพื้นที่ที่จะยังคงมีความหมายแม้เวลาจะผ่านไป",
-                
-                team_label: "ทีมงานของเรา", team_title: "คณะผู้บริหาร",
-                role_ceo: "ประธานเจ้าหน้าที่บริหาร", name_ceo: "นางสาว เชาวดี สนธิโรจน์", quote_ceo: "\"วิสัยทัศน์คือศิลปะในการมองเห็นสิ่งที่ผู้อื่นมองไม่เห็น\"",
-                role_cfo: "ประธานเจ้าหน้าที่ฝ่ายการเงิน", name_cfo: "นาย ชนบดี สนธิโรจน์", quote_cfo: "\"ความมั่นคงสร้างอิสระในการสร้างสรรค์สิ่งใหม่\"",
-                role_cdo: "ประธานเจ้าหน้าที่ฝ่ายออกแบบ", name_cdo: "นาย เรืองชาญ เทศเล็ก", quote_cdo: "\"การออกแบบคือสติปัญญาที่ถูกทำให้มองเห็นได้\"",
+                // ESG THAI
+                esg_label: "พันธสัญญาของเรา",
+                esg_title: "ความหรูหรา<br>อย่างมีสติ",
+                esg_desc: "เราเชื่อว่าความหรูหราที่แท้จริงต้องยั่งยืน ไม่ใช่แค่การสร้างความงาม แต่เราต้องรักษาโลกที่เป็นแรงบันดาลใจให้เราด้วย",
+                esg_1_title: "การออกแบบเชิงฟื้นฟู", esg_1_desc: "เราเลือกใช้วัสดุที่เป็นมิตรต่อโลก ตั้งแต่คอนกรีตคาร์บอนต่ำไปจนถึงไม้สักรีไซเคิล ทุกชิ้นถูกเลือกเพื่อลดผลกระทบต่อสิ่งแวดล้อม",
+                esg_2_title: "สนับสนุนช่างฝีมือ", esg_2_desc: "เรายกย่องงานฝีมือไทย การร่วมมือกับช่างฝีมือท้องถิ่นช่วยรักษาภูมิปัญญาโบราณให้คงอยู่และเติบโตต่อไป",
+                esg_3_title: "ความซื่อสัตย์และโปร่งใส", esg_3_desc: "ความจริงใจคือสกุลเงินที่มีค่าที่สุดของเรา เราทำงานด้วยความโปร่งใสในทุกขั้นตอน ดูแลการลงทุนของคุณเหมือนเป็นของเราเอง",
+                esg_4_title: "สร้างมรดก", esg_4_desc: "เราไม่ได้สร้างเพื่อวันนี้ แต่เพื่อคนรุ่นต่อไป โครงสร้างที่ออกแบบมาให้งดงามขึ้นตามกาลเวลาและคงอยู่เป็นร้อยปี",
 
-                founders_quote: "เราก่อตั้ง Craftsman Norman ด้วยเป้าหมายเดียว: เพื่อนำ 'ศิลปะแห่งการใช้ชีวิต' กลับคืนสู่พื้นที่สมัยใหม่ มันไม่ใช่แค่เรื่องของการออกแบบ แต่มันคือความรู้สึกที่คุณได้รับเมื่อก้าวผ่านประตูเข้ามา"
+                team_label: "ช่างฝีมือ", team_title: "เบื้องหลังผลงานระดับตำนาน",
+                name_ceo: "เชาวดี สนธิโรจน์", role_ceo_spiritual: "ผู้มองเห็นอนาคต", desc_ceo: "\"ความหรูหราที่แท้จริง คือการไม่มีสิ่งที่กวนใจ\"",
+                name_cfo: "ชนบดี สนธิโรจน์", role_cfo_spiritual: "สถาปนิกแห่งความมั่นคง", desc_cfo: "\"ความคิดสร้างสรรค์ต้องมีรากฐานที่มั่นคงจึงจะโบยบินได้\"",
+                name_cdo: "เรืองชาญ เทศเล็ก", role_cdo_spiritual: "ผู้แสวงหาความสมบูรณ์แบบ", desc_cdo: "\"พระเจ้าอยู่ในรายละเอียด เราก็เช่นกัน\""
             }
         };
     </script>
