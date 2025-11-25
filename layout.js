@@ -1,4 +1,4 @@
-// layout.js - Masterpiece Edition: Fully Responsive & Touch Optimized
+// layout.js - Fixed Mobile Chat Toggle Issue
 
 const globalConfig = {
     email: "craftmannorman.official@hotmail.com",
@@ -122,18 +122,18 @@ function injectLayout() {
         </div>
     </div>
 
-    <div id="chat-container" class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 group transition-opacity duration-500 ease-out">
-        <div id="chat-options" class="flex flex-col gap-3 transition-all duration-500 ease-[0.34, 1.56, 0.64, 1] opacity-0 translate-y-10 scale-75 origin-bottom group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100 pointer-events-none group-hover:pointer-events-auto">
+    <div id="chat-container" class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 transition-opacity duration-500 ease-out">
+        <div id="chat-options" class="flex flex-col gap-3 transition-all duration-500 ease-[0.34, 1.56, 0.64, 1] opacity-0 translate-y-10 scale-75 origin-bottom pointer-events-none">
             <a href="${globalConfig.chat.messenger}" target="_blank" class="w-12 h-12 bg-[#0084FF] rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition transform magnetic-btn" title="Messenger"><i class="fa-brands fa-facebook-messenger"></i></a>
             <a href="${globalConfig.chat.line}" target="_blank" class="w-12 h-12 bg-[#06C755] rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition transform magnetic-btn" title="Line"><i class="fa-brands fa-line"></i></a>
             <a href="${globalConfig.chat.whatsapp}" target="_blank" class="w-12 h-12 bg-[#25D366] rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition transform magnetic-btn" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
             <a href="${globalConfig.chat.wechat}" target="_blank" class="w-12 h-12 bg-[#09B83E] rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition transform magnetic-btn" title="WeChat"><i class="fa-brands fa-weixin"></i></a>
         </div>
         
-        <button onclick="toggleChat()" class="magnetic-btn w-14 h-14 bg-brand-dark rounded-full flex items-center justify-center text-brand-gold shadow-xl transition-all duration-300 ease-out transform group-hover:scale-110 relative border border-white/10">
+        <button onclick="toggleChat()" class="magnetic-btn w-14 h-14 bg-brand-dark rounded-full flex items-center justify-center text-brand-gold shadow-xl transition-all duration-300 ease-out relative border border-white/10 z-50">
             <i class="fa-solid fa-comments text-xl transition-all duration-300 absolute icon-chat"></i>
             <i class="fa-solid fa-xmark text-xl transition-all duration-300 opacity-0 absolute icon-close"></i>
-            <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse border-2 border-white group-hover:hidden notification-dot"></span>
+            <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse border-2 border-white notification-dot"></span>
         </button>
     </div>
 
@@ -190,16 +190,28 @@ function injectStyles() {
         #inquiry-modal.active .modal-content { opacity: 1; transform: translate(-50%, -50%) scale(1); }
         ::selection { background: #ab9367; color: white; }
         
+        /* Chat Logic - Controlled ONLY by .active class to fix mobile hover issue */
         #chat-container.active #chat-options { 
             opacity: 1; 
             transform: translateY(0) scale(1); 
             pointer-events: auto; 
         }
-        #chat-container.active .icon-chat { opacity: 0; }
-        #chat-container.active .icon-close { opacity: 1; }
+        #chat-container.active .icon-chat { opacity: 0; transform: rotate(90deg); }
+        #chat-container.active .icon-close { opacity: 1; transform: rotate(0); }
         #chat-container.active .notification-dot { display: none; }
         
-        /* Hide Scrollbar for Modal */
+        /* Optional: Add hover effect ONLY for devices that support hover (Desktop) */
+        @media (hover: hover) {
+            #chat-container:hover #chat-options {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                pointer-events: auto;
+            }
+             #chat-container:hover .icon-chat { opacity: 0; }
+             #chat-container:hover .icon-close { opacity: 1; }
+             #chat-container:hover .notification-dot { display: none; }
+        }
+        
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     `;
@@ -245,7 +257,6 @@ function initGlobalEvents() {
 }
 
 function initMagneticButtons() {
-    // Disable magnetic effect on touch devices to prevent weird behavior
     if (window.matchMedia("(pointer: coarse)").matches) return;
 
     const magnets = document.querySelectorAll('.magnetic-btn');
