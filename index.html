@@ -41,25 +41,32 @@
         
         .text-shadow-strong { text-shadow: 0 4px 30px rgba(0,0,0,0.8), 0 1px 3px rgba(0,0,0,0.5); }
 
-        /* Custom Cursor */
+        /* Custom Cursor - Hide on Touch Devices */
         @media (hover: none) { body { cursor: auto; } #custom-cursor { display: none; } }
-        #custom-cursor { 
-            position: fixed; top: 0; left: 0; width: 16px; height: 16px; 
-            background-color: rgba(29, 29, 31, 0.2); border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50%; pointer-events: none; z-index: 20000; 
-            transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s;
-            background-position: center; background-repeat: no-repeat;
-        }
-        #custom-cursor.hovered { width: 40px; height: 40px; background-color: rgba(171, 147, 103, 0.2); border: 1px solid #ab9367; }
-        #custom-cursor.magnifying {
-            width: 80px; height: 80px; background-color: #fff; border: 2px solid #ab9367;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3); background-size: 200%;
+        @media (hover: hover) {
+            #custom-cursor { 
+                position: fixed; top: 0; left: 0; width: 16px; height: 16px; 
+                background-color: rgba(29, 29, 31, 0.2); border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 50%; pointer-events: none; z-index: 20000; 
+                transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s;
+                background-position: center; background-repeat: no-repeat;
+            }
+            #custom-cursor.hovered { width: 40px; height: 40px; background-color: rgba(171, 147, 103, 0.2); border: 1px solid #ab9367; }
+            #custom-cursor.magnifying {
+                width: 80px; height: 80px; background-color: #fff; border: 2px solid #ab9367;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3); background-size: 200%;
+            }
         }
 
         /* Rounding & Parallax */
         #hero-container, #milestone-container, .rounded-section { 
-            clip-path: inset(0 round 32px); 
+            clip-path: inset(0 round 24px); 
             transition: clip-path 1s cubic-bezier(0.77, 0, 0.175, 1); 
+        }
+        @media (min-width: 768px) {
+            #hero-container, #milestone-container, .rounded-section { 
+                clip-path: inset(0 round 32px); 
+            }
         }
         
         .protected-media { -webkit-user-drag: none; user-select: none; pointer-events: none; }
@@ -71,15 +78,26 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
         /* Animation */
-        .partner-track { display: flex; gap: 3rem; animation: scroll 80s linear infinite; width: max-content; }
-        .partner-logo { filter: grayscale(100%) opacity(0.5); transition: all 0.4s; cursor: pointer; height: 24px; width: auto; flex-shrink: 0; }
+        .partner-track { display: flex; gap: 2rem; animation: scroll 60s linear infinite; width: max-content; }
+        .partner-logo { filter: grayscale(100%) opacity(0.5); transition: all 0.4s; cursor: pointer; height: 20px; width: auto; flex-shrink: 0; }
+        
+        /* Responsive Partner Logo */
+        @media (min-width: 768px) { 
+            .partner-logo { height: 24px; gap: 5rem; }
+            .partner-track { gap: 3rem; animation: scroll 80s linear infinite; }
+        }
+        
         .partner-logo:hover { filter: grayscale(0%) opacity(1); transform: scale(1.15); }
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         .milestone-bg {
             background-image: url('https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2000');
-            background-attachment: fixed; background-position: center; background-size: cover;
+            background-attachment: scroll; /* Better mobile performance */
+            background-position: center; background-size: cover;
             opacity: 0.15; mix-blend-mode: overlay;
+        }
+        @media (min-width: 1024px) {
+            .milestone-bg { background-attachment: fixed; }
         }
     </style>
 </head>
@@ -87,21 +105,21 @@
     <script src="layout.js"></script>
     <div id="custom-cursor"></div>
 
-    <main class="pt-24 px-4 pb-4">
+    <main class="pt-24 px-4 pb-4 md:px-4">
         
-        <header class="relative w-full max-w-[1600px] mx-auto h-[85vh] mb-24">
+        <header class="relative w-full max-w-[1600px] mx-auto h-[70vh] md:h-[85vh] mb-16 md:mb-24">
             <div id="hero-container" class="w-full h-full relative overflow-hidden bg-black shadow-2xl">
                 <video autoplay muted playsinline loop disablePictureInPicture controlsList="nodownload" class="protected-media absolute inset-0 w-full h-full object-cover opacity-70">
                     <source src="https://videos.pexels.com/video-files/7578552/7578552-uhd_2560_1440_30fps.mp4" type="video/mp4">
                 </video>
-                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
                 
                 <div class="absolute bottom-0 left-0 w-full p-6 md:p-12 z-20">
-                    <div class="flex flex-col md:flex-row items-end justify-between">
-                        <h1 class="text-white text-6xl md:text-9xl font-serif leading-[0.9] tracking-tight mb-8 md:mb-0 drop-shadow-lg text-shadow-strong parallax-text" data-i18n="hero_title">
+                    <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
+                        <h1 class="text-white text-5xl md:text-8xl lg:text-9xl font-serif leading-[0.95] tracking-tight drop-shadow-lg text-shadow-strong parallax-text" data-i18n="hero_title">
                             Think of <span class="italic text-brand-gold">Art,</span><br>Think of <span class="italic text-brand-gold">Us.</span>
                         </h1>
-                        <div class="backdrop-blur-xl bg-white/10 p-8 rounded-[32px] border border-white/20 max-w-lg shadow-lg hover:bg-white/20 transition duration-500">
+                        <div class="backdrop-blur-xl bg-white/10 p-6 md:p-8 rounded-[24px] md:rounded-[32px] border border-white/20 max-w-lg shadow-lg hover:bg-white/20 transition duration-500 w-full md:w-auto">
                              <p class="text-white/95 text-sm md:text-base font-sans leading-relaxed" data-i18n="hero_desc">
                                 Where life becomes a masterpiece. We strive for the highest echelon of artistic expression, presenting each project as a sustainable legacy.
                             </p>
@@ -111,59 +129,59 @@
             </div>
         </header>
 
-        <section class="py-16 border-b border-brand-dark/5 bg-white overflow-hidden relative mb-24 rounded-[32px] mx-auto max-w-[1600px] shadow-sm">
-            <div class="max-w-3xl mx-auto text-center mb-12 px-6">
+        <section class="py-12 md:py-16 border-b border-brand-dark/5 bg-white overflow-hidden relative mb-16 md:mb-24 rounded-[24px] md:rounded-[32px] mx-auto max-w-[1600px] shadow-sm">
+            <div class="max-w-3xl mx-auto text-center mb-8 md:mb-12 px-6">
                 <span class="text-brand-gold text-[10px] uppercase tracking-[0.3em] font-bold block mb-3" data-i18n="partner_subtitle">The Curator's Palette</span>
-                <h3 class="text-2xl md:text-3xl font-serif text-brand-dark leading-relaxed" data-i18n="partner_desc">
+                <h3 class="text-xl md:text-3xl font-serif text-brand-dark leading-relaxed" data-i18n="partner_desc">
                     "We don't just select materials; we curate elements that age gracefully. Only the finest textures make it into our library."
                 </h3>
             </div>
             
-            <div class="partner-slider relative flex w-full overflow-hidden opacity-60 hover:opacity-100 transition duration-700">
-                <div class="partner-track flex gap-12 items-center whitespace-nowrap py-4 px-6 md:px-12">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Hafele_Logo.svg/320px-Hafele_Logo.svg.png" class="partner-logo shrink-0 magnetic-btn" alt="Hafele">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Blum_Logo.svg/320px-Blum_Logo.svg.png" class="partner-logo shrink-0 magnetic-btn" alt="Blum">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Schneider_Electric_2007.svg/320px-Schneider_Electric_2007.svg.png" class="partner-logo shrink-0 magnetic-btn" alt="Schneider">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Logo_TOTO.svg/320px-Logo_TOTO.svg.png" class="partner-logo shrink-0 magnetic-btn" alt="TOTO">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Kohler_logo.svg/320px-Kohler_logo.svg.png" class="partner-logo shrink-0 magnetic-btn" alt="Kohler">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Grohe_logo.svg/320px-Grohe_logo.svg.png" class="partner-logo shrink-0 magnetic-btn" alt="Grohe">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Hansgrohe_Logo.svg/320px-Hansgrohe_Logo.svg.png" class="partner-logo shrink-0 magnetic-btn" alt="Hansgrohe">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/American_Standard_Logo.svg/320px-American_Standard_Logo.svg.png" class="partner-logo shrink-0 magnetic-btn" alt="American Standard">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Franke_Holding_AG_Logo.svg/320px-Franke_Holding_AG_Logo.svg.png" class="partner-logo shrink-0 magnetic-btn" alt="Franke">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Smeg_logo.svg/320px-Smeg_logo.svg.png" class="partner-logo shrink-0 magnetic-btn" alt="Smeg">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Siemens-logo.svg/320px-Siemens-logo.svg.png" class="partner-logo shrink-0 magnetic-btn" alt="Siemens">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Bosch_logo.svg/320px-Bosch_logo.svg.png" class="partner-logo shrink-0 magnetic-btn" alt="Bosch">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Daikin_logo.svg/320px-Daikin_logo.svg.png" class="partner-logo shrink-0 magnetic-btn" alt="Daikin">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Mitsubishi_Electric_logo.svg/320px-Mitsubishi_Electric_logo.svg.png" class="partner-logo shrink-0 magnetic-btn" alt="Mitsubishi">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Philips_Logo.svg/320px-Philips_Logo.svg.png" class="partner-logo shrink-0 magnetic-btn" alt="Philips">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/TOA_Corporation_logo.svg/320px-TOA_Corporation_logo.svg.png" class="partner-logo shrink-0 magnetic-btn" alt="TOA"> 
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Benjamin_Moore_%26_Co._logo.svg/320px-Benjamin_Moore_%26_Co._logo.svg.png" class="partner-logo shrink-0 magnetic-btn" alt="Benjamin Moore">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Herman_Miller_logo.svg/320px-Herman_Miller_logo.svg.png" class="partner-logo shrink-0 magnetic-btn" alt="Herman Miller">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Vitra_Logo.svg/320px-Vitra_Logo.svg.png" class="partner-logo shrink-0 magnetic-btn" alt="Vitra">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Hettich_Logo_2017.svg/320px-Hettich_Logo_2017.svg.png" class="partner-logo shrink-0 magnetic-btn" alt="Hettich">
+            <div class="partner-slider relative flex w-full overflow-hidden opacity-80 md:opacity-60 hover:opacity-100 transition duration-700">
+                <div class="partner-track flex gap-8 md:gap-12 items-center whitespace-nowrap py-4 px-6 md:px-12">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Hafele_Logo.svg/320px-Hafele_Logo.svg.png" class="partner-logo" alt="Hafele">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Blum_Logo.svg/320px-Blum_Logo.svg.png" class="partner-logo" alt="Blum">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Schneider_Electric_2007.svg/320px-Schneider_Electric_2007.svg.png" class="partner-logo" alt="Schneider">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Logo_TOTO.svg/320px-Logo_TOTO.svg.png" class="partner-logo" alt="TOTO">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Kohler_logo.svg/320px-Kohler_logo.svg.png" class="partner-logo" alt="Kohler">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Grohe_logo.svg/320px-Grohe_logo.svg.png" class="partner-logo" alt="Grohe">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Hansgrohe_Logo.svg/320px-Hansgrohe_Logo.svg.png" class="partner-logo" alt="Hansgrohe">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/American_Standard_Logo.svg/320px-American_Standard_Logo.svg.png" class="partner-logo" alt="American Standard">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Franke_Holding_AG_Logo.svg/320px-Franke_Holding_AG_Logo.svg.png" class="partner-logo" alt="Franke">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Smeg_logo.svg/320px-Smeg_logo.svg.png" class="partner-logo" alt="Smeg">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Siemens-logo.svg/320px-Siemens-logo.svg.png" class="partner-logo" alt="Siemens">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Bosch_logo.svg/320px-Bosch_logo.svg.png" class="partner-logo" alt="Bosch">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Daikin_logo.svg/320px-Daikin_logo.svg.png" class="partner-logo" alt="Daikin">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Mitsubishi_Electric_logo.svg/320px-Mitsubishi_Electric_logo.svg.png" class="partner-logo" alt="Mitsubishi">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Philips_Logo.svg/320px-Philips_Logo.svg.png" class="partner-logo" alt="Philips">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/TOA_Corporation_logo.svg/320px-TOA_Corporation_logo.svg.png" class="partner-logo" alt="TOA"> 
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Benjamin_Moore_%26_Co._logo.svg/320px-Benjamin_Moore_%26_Co._logo.svg.png" class="partner-logo" alt="Benjamin Moore">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Herman_Miller_logo.svg/320px-Herman_Miller_logo.svg.png" class="partner-logo" alt="Herman Miller">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Vitra_Logo.svg/320px-Vitra_Logo.svg.png" class="partner-logo" alt="Vitra">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Hettich_Logo_2017.svg/320px-Hettich_Logo_2017.svg.png" class="partner-logo" alt="Hettich">
                 </div>
             </div>
         </section>
 
-        <section id="milestone" class="relative w-full max-w-[1600px] mx-auto h-[60vh] mb-32 bg-[#1d1d1f] text-white overflow-hidden rounded-[32px] shadow-lg">
+        <section id="milestone" class="relative w-full max-w-[1600px] mx-auto h-[50vh] md:h-[60vh] mb-24 md:mb-32 bg-[#1d1d1f] text-white overflow-hidden rounded-[24px] md:rounded-[32px] shadow-lg">
             <div id="milestone-container" class="w-full h-full relative">
                 <div class="absolute inset-0 milestone-bg z-0"></div>
                 <div class="absolute inset-0 z-10 flex flex-col justify-center items-center text-center px-6 md:px-12">
-                    <span class="text-brand-gold text-[10px] uppercase tracking-[0.2em] font-bold mb-6 block" data-i18n="intro_label">The Manifesto</span>
-                    <h2 class="text-3xl md:text-6xl font-serif text-white leading-tight mb-10 drop-shadow-lg max-w-5xl" data-i18n="intro_text">
-                        "In a world of speed, we choose the path of <span class="text-brand-gold italic">slow perfection.</span><br>We don't just build spaces; we craft the backdrop for your legacy."
+                    <span class="text-brand-gold text-[10px] uppercase tracking-[0.2em] font-bold mb-4 md:mb-6 block" data-i18n="intro_label">The Manifesto</span>
+                    <h2 class="text-2xl md:text-3xl lg:text-6xl font-serif text-white leading-tight mb-8 md:mb-10 drop-shadow-lg max-w-5xl" data-i18n="intro_text">
+                        "In a world of speed, we choose the path of <span class="text-brand-gold italic">slow perfection.</span><br class="hidden md:block"> We don't just build spaces; we craft the backdrop for your legacy."
                     </h2>
-                    <a href="story.html" onclick="navTo(event, 'story')" class="magnetic-btn px-10 py-4 rounded-full bg-white text-brand-dark text-sm font-bold hover:bg-brand-gold hover:text-white transition duration-300 shadow-lg" data-i18n="btn_story">Read Our Philosophy</a>
+                    <a href="story.html" onclick="navTo(event, 'story')" class="magnetic-btn px-8 py-3 md:px-10 md:py-4 rounded-full bg-white text-brand-dark text-xs md:text-sm font-bold hover:bg-brand-gold hover:text-white transition duration-300 shadow-lg" data-i18n="btn_story">Read Our Philosophy</a>
                 </div>
             </div>
         </section>
 
-        <section id="expertise-section" class="max-w-[1600px] mx-auto mb-24 scroll-mt-24 relative">
-            <div class="flex justify-between items-end px-6 md:px-16 mb-16">
+        <section id="expertise-section" class="max-w-[1600px] mx-auto mb-16 md:mb-24 scroll-mt-24 relative">
+            <div class="flex justify-between items-end px-6 md:px-16 mb-8 md:mb-16">
                 <div>
-                    <span class="text-brand-gold text-xs uppercase tracking-[0.3em] font-bold block mb-4" data-i18n="craft_title">Our Craft</span>
+                    <span class="text-brand-gold text-xs uppercase tracking-[0.3em] font-bold block mb-2 md:mb-4" data-i18n="craft_title">Our Craft</span>
                     <a href="expertise.html" class="group magnetic-btn inline-block" onclick="navTo(event, 'expertise')">
-                        <h3 class="text-5xl md:text-7xl font-serif text-brand-dark group-hover:text-brand-gold transition duration-500" data-i18n="srv_title">Expertise</h3>
+                        <h3 class="text-4xl md:text-7xl font-serif text-brand-dark group-hover:text-brand-gold transition duration-500" data-i18n="srv_title">Expertise</h3>
                     </a>
                 </div>
                 <div class="hidden md:flex gap-4">
@@ -176,54 +194,54 @@
                 </div>
             </div>
             
-            <div id="expertise-scroll" class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-12 px-6 md:px-16 no-scrollbar" style="-webkit-overflow-scrolling: touch;">
+            <div id="expertise-scroll" class="flex overflow-x-auto snap-x snap-mandatory gap-4 md:gap-6 pb-8 md:pb-12 px-4 md:px-16 no-scrollbar" style="-webkit-overflow-scrolling: touch;">
                 
-                <div class="snap-start shrink-0 w-[300px] md:w-[360px] h-[500px] relative group cursor-pointer overflow-hidden rounded-[4px] magnetic-btn" onclick="navTo(event, 'expertise')">
+                <div class="snap-center shrink-0 w-[80vw] md:w-[360px] h-[400px] md:h-[500px] relative group cursor-pointer overflow-hidden rounded-[16px] md:rounded-[4px] magnetic-btn" onclick="navTo(event, 'expertise')">
                     <img src="https://images.unsplash.com/photo-1600607687644-c7171b42498b?q=80&w=800" class="absolute inset-0 w-full h-full object-cover transition duration-[1.5s] group-hover:scale-110 filter grayscale group-hover:grayscale-0">
-                    <video muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition duration-700" onmouseover="this.play()" onmouseout="this.pause()">
+                    <video muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition duration-700 hidden md:block" onmouseover="this.play()" onmouseout="this.pause()">
                         <source src="https://videos.pexels.com/video-files/3205633/3205633-hd_1280_720_25fps.mp4" type="video/mp4">
                     </video>
                     <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-500"></div>
-                    <div class="absolute inset-0 p-8 flex flex-col justify-between pointer-events-none">
-                        <span class="text-8xl font-serif text-white/20 font-bold group-hover:text-brand-gold/40 transition duration-500">01</span>
+                    <div class="absolute inset-0 p-6 md:p-8 flex flex-col justify-between pointer-events-none">
+                        <span class="text-6xl md:text-8xl font-serif text-white/20 font-bold group-hover:text-brand-gold/40 transition duration-500">01</span>
                         <div>
-                            <h4 class="text-3xl font-serif text-white mb-2 translate-y-4 group-hover:translate-y-0 transition duration-500" data-i18n="srv_arch">Architecture</h4>
-                            <p class="text-white/70 text-xs opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition duration-500 delay-100">Master planning & structural design.</p>
+                            <h4 class="text-2xl md:text-3xl font-serif text-white mb-2 translate-y-4 group-hover:translate-y-0 transition duration-500" data-i18n="srv_arch">Architecture</h4>
+                            <p class="text-white/70 text-xs opacity-100 md:opacity-0 md:group-hover:opacity-100 md:translate-y-4 md:group-hover:translate-y-0 transition duration-500 delay-100">Master planning & structural design.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="snap-start shrink-0 w-[300px] md:w-[360px] h-[500px] relative group cursor-pointer overflow-hidden rounded-[4px] magnetic-btn" onclick="navTo(event, 'expertise')">
+                <div class="snap-center shrink-0 w-[80vw] md:w-[360px] h-[400px] md:h-[500px] relative group cursor-pointer overflow-hidden rounded-[16px] md:rounded-[4px] magnetic-btn" onclick="navTo(event, 'expertise')">
                     <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=800" class="absolute inset-0 w-full h-full object-cover transition duration-[1.5s] group-hover:scale-110 filter grayscale group-hover:grayscale-0">
-                    <video muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition duration-700" onmouseover="this.play()" onmouseout="this.pause()">
+                    <video muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition duration-700 hidden md:block" onmouseover="this.play()" onmouseout="this.pause()">
                         <source src="https://videos.pexels.com/video-files/7034567/7034567-hd_1280_720_30fps.mp4" type="video/mp4">
                     </video>
                     <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-500"></div>
-                    <div class="absolute inset-0 p-8 flex flex-col justify-between pointer-events-none">
-                        <span class="text-8xl font-serif text-white/20 font-bold group-hover:text-brand-gold/40 transition duration-500">02</span>
+                    <div class="absolute inset-0 p-6 md:p-8 flex flex-col justify-between pointer-events-none">
+                        <span class="text-6xl md:text-8xl font-serif text-white/20 font-bold group-hover:text-brand-gold/40 transition duration-500">02</span>
                         <div>
-                            <h4 class="text-3xl font-serif text-white mb-2 translate-y-4 group-hover:translate-y-0 transition duration-500" data-i18n="srv_interior">Interior</h4>
-                            <p class="text-white/70 text-xs opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition duration-500 delay-100">Space planning & styling.</p>
+                            <h4 class="text-2xl md:text-3xl font-serif text-white mb-2 translate-y-4 group-hover:translate-y-0 transition duration-500" data-i18n="srv_interior">Interior</h4>
+                            <p class="text-white/70 text-xs opacity-100 md:opacity-0 md:group-hover:opacity-100 md:translate-y-4 md:group-hover:translate-y-0 transition duration-500 delay-100">Space planning & styling.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="snap-start shrink-0 w-[300px] md:w-[360px] h-[500px] relative group cursor-pointer overflow-hidden rounded-[4px] magnetic-btn" onclick="navTo(event, 'expertise')">
+                <div class="snap-center shrink-0 w-[80vw] md:w-[360px] h-[400px] md:h-[500px] relative group cursor-pointer overflow-hidden rounded-[16px] md:rounded-[4px] magnetic-btn" onclick="navTo(event, 'expertise')">
                     <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=800" class="absolute inset-0 w-full h-full object-cover transition duration-[1.5s] group-hover:scale-110 filter grayscale group-hover:grayscale-0">
-                    <video muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition duration-700" onmouseover="this.play()" onmouseout="this.pause()">
+                    <video muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition duration-700 hidden md:block" onmouseover="this.play()" onmouseout="this.pause()">
                         <source src="https://videos.pexels.com/video-files/6474038/6474038-hd_1280_720_25fps.mp4" type="video/mp4">
                     </video>
                     <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-500"></div>
-                    <div class="absolute inset-0 p-8 flex flex-col justify-between pointer-events-none">
-                        <span class="text-8xl font-serif text-white/20 font-bold group-hover:text-brand-gold/40 transition duration-500">03</span>
+                    <div class="absolute inset-0 p-6 md:p-8 flex flex-col justify-between pointer-events-none">
+                        <span class="text-6xl md:text-8xl font-serif text-white/20 font-bold group-hover:text-brand-gold/40 transition duration-500">03</span>
                         <div>
-                            <h4 class="text-3xl font-serif text-white mb-2 translate-y-4 group-hover:translate-y-0 transition duration-500" data-i18n="srv_reno">Renovation</h4>
-                            <p class="text-white/70 text-xs opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition duration-500 delay-100">Turnkey construction solutions.</p>
+                            <h4 class="text-2xl md:text-3xl font-serif text-white mb-2 translate-y-4 group-hover:translate-y-0 transition duration-500" data-i18n="srv_reno">Renovation</h4>
+                            <p class="text-white/70 text-xs opacity-100 md:opacity-0 md:group-hover:opacity-100 md:translate-y-4 md:group-hover:translate-y-0 transition duration-500 delay-100">Turnkey construction solutions.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="snap-start shrink-0 w-[200px] md:w-[250px] h-[500px] flex flex-col justify-center items-center group cursor-pointer magnetic-btn border border-brand-dark/10 rounded-[4px] hover:bg-brand-dark hover:text-white transition duration-500" onclick="navTo(event, 'expertise')">
+                <div class="snap-center shrink-0 w-[200px] md:w-[250px] h-[400px] md:h-[500px] flex flex-col justify-center items-center group cursor-pointer magnetic-btn border border-brand-dark/10 rounded-[16px] md:rounded-[4px] hover:bg-brand-dark hover:text-white transition duration-500" onclick="navTo(event, 'expertise')">
                     <div class="text-center">
                         <span class="block text-xs uppercase tracking-widest mb-2" data-i18n="label_explore">Explore</span>
                         <span class="font-serif text-3xl italic" data-i18n="view_all_services">All Services</span>
@@ -234,50 +252,43 @@
             </div>
         </section>
 
-        <section class="relative max-w-[1600px] mx-auto h-[80vh] bg-[#111] mb-24 overflow-hidden rounded-[32px] flex items-center shadow-2xl">
-            
-            <div class="absolute inset-0 z-0 opacity-40 grayscale" 
-                 style="background-image: url('https://images.unsplash.com/photo-1629196911514-cfd8d628e26c?q=80&w=2000'); background-size: cover; background-position: center;">
-            </div>
-            
+        <section class="relative max-w-[1600px] mx-auto h-auto md:h-[80vh] bg-[#111] mb-16 md:mb-24 overflow-hidden rounded-[24px] md:rounded-[32px] flex items-center shadow-2xl py-12 md:py-0">
+            <div class="absolute inset-0 z-0 opacity-40 grayscale" style="background-image: url('https://images.unsplash.com/photo-1629196911514-cfd8d628e26c?q=80&w=2000'); background-size: cover; background-position: center;"></div>
             <div class="absolute inset-0 z-0 bg-black/40"></div>
 
-            <div class="relative z-10 w-full px-6 md:px-16 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div class="relative z-10 w-full px-6 md:px-16 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
                 <div class="order-2 md:order-1">
-                    <div class="relative h-[500px] w-full rounded-[16px] overflow-hidden shadow-2xl border border-white/10 group">
-                        
-                        <video autoplay muted loop playsinline 
-                               class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition duration-700 grayscale hover:grayscale-0">
+                    <div class="relative h-[300px] md:h-[500px] w-full rounded-[16px] overflow-hidden shadow-2xl border border-white/10 group">
+                        <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition duration-700 grayscale hover:grayscale-0">
                             <source src="Handcrafted Bespoke.mp4" type="video/mp4">
                         </video>
-                        
                         <div class="absolute inset-0 border border-brand-gold/20 rounded-[16px] pointer-events-none"></div>
                     </div>
                 </div>
 
-                <div class="order-1 md:order-2 md:pl-12 text-white">
-                    <span class="text-brand-gold text-xs uppercase tracking-[0.3em] font-bold block mb-6" data-i18n="human_label">The Human Touch</span>
-                    <h2 class="text-4xl md:text-6xl font-serif mb-8 leading-tight" data-i18n="human_title">
+                <div class="order-1 md:order-2 md:pl-12 text-white text-center md:text-left">
+                    <span class="text-brand-gold text-xs uppercase tracking-[0.3em] font-bold block mb-4 md:mb-6" data-i18n="human_label">The Human Touch</span>
+                    <h2 class="text-3xl md:text-6xl font-serif mb-6 md:mb-8 leading-tight" data-i18n="human_title">
                         Handcrafted<br><span class="italic text-brand-gold">Bespoke.</span>
                     </h2>
-                    <p class="text-white/60 text-lg leading-relaxed mb-8 max-w-md font-sans" data-i18n="human_desc">
+                    <p class="text-white/60 text-sm md:text-lg leading-relaxed mb-8 max-w-md font-sans mx-auto md:mx-0" data-i18n="human_desc">
                         Technology aids us, but it never replaces us. Every line drawn, every texture selected, and every joint fitted passes through the hands of a master craftsman.
                     </p>
-                    <div class="w-24 h-[1px] bg-brand-gold/50"></div>
+                    <div class="w-16 md:w-24 h-[1px] bg-brand-gold/50 mx-auto md:mx-0"></div>
                 </div>
             </div>
         </section>
 
-        <section id="works-section" class="py-24 mb-12 relative scroll-mt-24 bg-white rounded-[32px] max-w-[1600px] mx-auto shadow-sm border border-brand-dark/5">
+        <section id="works-section" class="py-12 md:py-24 mb-12 relative scroll-mt-24 bg-white rounded-[24px] md:rounded-[32px] max-w-[1600px] mx-auto shadow-sm border border-brand-dark/5">
             
-            <div class="px-6 md:px-16 mb-16 flex flex-col md:flex-row justify-between items-end">
+            <div class="px-6 md:px-16 mb-8 md:mb-16 flex flex-col md:flex-row justify-between items-end">
                 <div>
-                    <span class="text-brand-gold text-xs uppercase tracking-[0.3em] font-bold block mb-4" data-i18n="portfolio_label">Portfolio</span>
+                    <span class="text-brand-gold text-xs uppercase tracking-[0.3em] font-bold block mb-2 md:mb-4" data-i18n="portfolio_label">Portfolio</span>
                     <a href="portfolio.html" class="group magnetic-btn inline-block" onclick="navTo(event, 'works')">
-                        <h3 class="text-5xl md:text-7xl font-serif text-brand-dark group-hover:text-brand-gold transition duration-500" data-i18n="works_title">Selected Works</h3>
+                        <h3 class="text-4xl md:text-7xl font-serif text-brand-dark group-hover:text-brand-gold transition duration-500" data-i18n="works_title">Selected Works</h3>
                     </a>
                 </div>
-                <div class="flex items-center gap-6 mt-8 md:mt-0">
+                <div class="flex items-center gap-4 md:gap-6 mt-6 md:mt-0 w-full md:w-auto justify-between md:justify-end">
                     <div class="hidden md:flex gap-2">
                         <button onclick="document.getElementById('works-scroll').scrollBy({left: -600, behavior: 'smooth'})" class="magnetic-btn w-12 h-12 rounded-full border border-brand-dark/10 flex items-center justify-center hover:bg-brand-dark hover:text-white transition">
                             <i class="fa-solid fa-arrow-left"></i>
@@ -291,40 +302,40 @@
             </div>
 
             <div class="w-full">
-                <div id="works-scroll" class="flex overflow-x-auto snap-x snap-mandatory gap-8 pb-12 px-6 md:px-16 no-scrollbar items-center" style="-webkit-overflow-scrolling: touch;">
+                <div id="works-scroll" class="flex overflow-x-auto snap-x snap-mandatory gap-4 md:gap-8 pb-8 md:pb-12 px-4 md:px-16 no-scrollbar items-center" style="-webkit-overflow-scrolling: touch;">
                     
-                    <div class="snap-start shrink-0 w-[85vw] md:w-[650px] h-[600px] relative group cursor-pointer magnetic-btn overflow-hidden rounded-[8px]" onclick="navTo(event, 'works')">
+                    <div class="snap-center shrink-0 w-[85vw] md:w-[650px] h-[400px] md:h-[600px] relative group cursor-pointer magnetic-btn overflow-hidden rounded-[16px] md:rounded-[8px]" onclick="navTo(event, 'works')">
                         <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200" class="w-full h-full object-cover transition duration-[1.5s] group-hover:scale-110 grayscale group-hover:grayscale-0">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex flex-col justify-end p-10">
-                            <span class="text-brand-gold text-6xl font-serif absolute top-8 right-8 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition duration-700 delay-100">01</span>
-                            <div class="translate-y-4 group-hover:translate-y-0 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition duration-500 flex flex-col justify-end p-6 md:p-10">
+                            <span class="text-brand-gold text-4xl md:text-6xl font-serif absolute top-6 right-6 md:top-8 md:right-8 opacity-100 md:opacity-0 md:group-hover:opacity-100 md:translate-y-4 md:group-hover:translate-y-0 transition duration-700 delay-100">01</span>
+                            <div class="translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition duration-500">
                                 <span class="text-brand-gold text-[10px] uppercase tracking-widest mb-2 block">Residential</span>
-                                <h4 class="text-4xl font-serif text-white leading-none mb-2" data-i18n="work_origin">Origin One</h4>
-                                <p class="text-white/60 text-sm font-sans" data-i18n="loc_phromphong">Phromphong, Sukhumvit</p>
+                                <h4 class="text-2xl md:text-4xl font-serif text-white leading-none mb-2" data-i18n="work_origin">Origin One</h4>
+                                <p class="text-white/60 text-xs md:text-sm font-sans" data-i18n="loc_phromphong">Phromphong, Sukhumvit</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="snap-start shrink-0 w-[85vw] md:w-[650px] h-[600px] relative group cursor-pointer magnetic-btn overflow-hidden rounded-[8px]" onclick="navTo(event, 'works')">
+                    <div class="snap-center shrink-0 w-[85vw] md:w-[650px] h-[400px] md:h-[600px] relative group cursor-pointer magnetic-btn overflow-hidden rounded-[16px] md:rounded-[8px]" onclick="navTo(event, 'works')">
                         <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1200" class="w-full h-full object-cover transition duration-[1.5s] group-hover:scale-110 grayscale group-hover:grayscale-0">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex flex-col justify-end p-10">
-                            <span class="text-brand-gold text-6xl font-serif absolute top-8 right-8 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition duration-700 delay-100">02</span>
-                            <div class="translate-y-4 group-hover:translate-y-0 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition duration-500 flex flex-col justify-end p-6 md:p-10">
+                            <span class="text-brand-gold text-4xl md:text-6xl font-serif absolute top-6 right-6 md:top-8 md:right-8 opacity-100 md:opacity-0 md:group-hover:opacity-100 md:translate-y-4 md:group-hover:translate-y-0 transition duration-700 delay-100">02</span>
+                            <div class="translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition duration-500">
                                 <span class="text-brand-gold text-[10px] uppercase tracking-widest mb-2 block">Wellness & Spa</span>
-                                <h4 class="text-4xl font-serif text-white leading-none mb-2" data-i18n="work_panpuri">Panpuri Wellness</h4>
-                                <p class="text-white/60 text-sm font-sans" data-i18n="loc_gaysorn">Gaysorn Village</p>
+                                <h4 class="text-2xl md:text-4xl font-serif text-white leading-none mb-2" data-i18n="work_panpuri">Panpuri Wellness</h4>
+                                <p class="text-white/60 text-xs md:text-sm font-sans" data-i18n="loc_gaysorn">Gaysorn Village</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="snap-start shrink-0 w-[85vw] md:w-[650px] h-[600px] relative group cursor-pointer magnetic-btn overflow-hidden rounded-[8px]" onclick="navTo(event, 'works')">
+                    <div class="snap-center shrink-0 w-[85vw] md:w-[650px] h-[400px] md:h-[600px] relative group cursor-pointer magnetic-btn overflow-hidden rounded-[16px] md:rounded-[8px]" onclick="navTo(event, 'works')">
                         <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1200" class="w-full h-full object-cover transition duration-[1.5s] group-hover:scale-110 grayscale group-hover:grayscale-0">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex flex-col justify-end p-10">
-                            <span class="text-brand-gold text-6xl font-serif absolute top-8 right-8 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition duration-700 delay-100">03</span>
-                            <div class="translate-y-4 group-hover:translate-y-0 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition duration-500 flex flex-col justify-end p-6 md:p-10">
+                            <span class="text-brand-gold text-4xl md:text-6xl font-serif absolute top-6 right-6 md:top-8 md:right-8 opacity-100 md:opacity-0 md:group-hover:opacity-100 md:translate-y-4 md:group-hover:translate-y-0 transition duration-700 delay-100">03</span>
+                            <div class="translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition duration-500">
                                 <span class="text-brand-gold text-[10px] uppercase tracking-widest mb-2 block">Office</span>
-                                <h4 class="text-4xl font-serif text-white leading-none mb-2" data-i18n="work_central">Central Digital</h4>
-                                <p class="text-white/60 text-sm font-sans" data-i18n="loc_townhall">Office Renovation</p>
+                                <h4 class="text-2xl md:text-4xl font-serif text-white leading-none mb-2" data-i18n="work_central">Central Digital</h4>
+                                <p class="text-white/60 text-xs md:text-sm font-sans" data-i18n="loc_townhall">Office Renovation</p>
                             </div>
                         </div>
                     </div>
@@ -333,50 +344,49 @@
             </div>
         </section>
 
-        <section class="py-24 max-w-[1600px] mx-auto mb-12 px-6 md:px-16">
-            <div class="text-center mb-16">
-                <h3 class="text-3xl md:text-5xl font-serif italic text-brand-dark" data-i18n="art_living">The Art of Living</h3>
+        <section class="py-16 md:py-24 max-w-[1600px] mx-auto mb-8 md:mb-12 px-6 md:px-16">
+            <div class="text-center mb-12 md:mb-16">
+                <h3 class="text-2xl md:text-3xl lg:text-5xl font-serif italic text-brand-dark" data-i18n="art_living">The Art of Living</h3>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-8 text-center">
                 <div class="group">
-                    <div class="h-64 overflow-hidden mb-6 rounded-full w-40 mx-auto">
+                    <div class="h-48 md:h-64 overflow-hidden mb-4 md:mb-6 rounded-full w-32 md:w-40 mx-auto">
                         <img src="https://images.unsplash.com/photo-1567093322487-4032f468da31?q=80&w=600" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700">
                     </div>
-                    <h4 class="text-xl font-serif mb-2" data-i18n="art_light">Light</h4>
+                    <h4 class="text-lg md:text-xl font-serif mb-2" data-i18n="art_light">Light</h4>
                     <p class="text-xs text-brand-dark/50 max-w-xs mx-auto" data-i18n="desc_light">Sculpting space with shadow and brilliance.</p>
                 </div>
                 <div class="group md:-mt-12">
-                    <div class="h-64 overflow-hidden mb-6 rounded-full w-40 mx-auto">
+                    <div class="h-48 md:h-64 overflow-hidden mb-4 md:mb-6 rounded-full w-32 md:w-40 mx-auto">
                         <img src="https://images.unsplash.com/photo-1519643381401-22c77e60520e?q=80&w=600" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700">
                     </div>
-                    <h4 class="text-xl font-serif mb-2" data-i18n="art_sound">Sound</h4>
+                    <h4 class="text-lg md:text-xl font-serif mb-2" data-i18n="art_sound">Sound</h4>
                     <p class="text-xs text-brand-dark/50 max-w-xs mx-auto" data-i18n="desc_sound">A sanctuary of silence amidst the chaos.</p>
                 </div>
                 <div class="group">
-                    <div class="h-64 overflow-hidden mb-6 rounded-full w-40 mx-auto">
+                    <div class="h-48 md:h-64 overflow-hidden mb-4 md:mb-6 rounded-full w-32 md:w-40 mx-auto">
                         <img src="https://images.unsplash.com/photo-1535359056830-d4badde79747?q=80&w=600" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700">
                     </div>
-                    <h4 class="text-xl font-serif mb-2" data-i18n="art_touch">Touch</h4>
+                    <h4 class="text-lg md:text-xl font-serif mb-2" data-i18n="art_touch">Touch</h4>
                     <p class="text-xs text-brand-dark/50 max-w-xs mx-auto" data-i18n="desc_touch">Textures that invite the hand to explore.</p>
                 </div>
             </div>
         </section>
 
-        <section id="journal-section" class="py-20 max-w-[1600px] mx-auto scroll-mt-24 bg-white rounded-[32px] mb-24 border border-brand-dark/5">
-            <div class="flex flex-col md:flex-row justify-between items-baseline mb-16 px-6 md:px-16">
+        <section id="journal-section" class="py-16 md:py-20 max-w-[1600px] mx-auto scroll-mt-24 bg-white rounded-[24px] md:rounded-[32px] mb-16 md:mb-24 border border-brand-dark/5">
+            <div class="flex flex-col md:flex-row justify-between items-baseline mb-12 md:mb-16 px-6 md:px-16">
                 <div>
                     <span class="text-brand-gold text-xs uppercase tracking-[0.3em] font-bold block mb-4" data-i18n="insights_label">Insights</span>
                     <a href="journal.html" class="group magnetic-btn inline-block" onclick="navTo(event, 'journal')">
-                        <h3 class="text-5xl md:text-6xl font-serif text-brand-dark group-hover:text-brand-gold transition" data-i18n="journal_title">Journal</h3>
+                        <h3 class="text-4xl md:text-5xl lg:text-6xl font-serif text-brand-dark group-hover:text-brand-gold transition" data-i18n="journal_title">Journal</h3>
                     </a>
                 </div>
                 <a href="journal.html" class="text-xs uppercase tracking-widest border-b border-brand-dark pb-1 hover:text-brand-gold hover:border-brand-gold transition mt-6 md:mt-0 magnetic-btn" onclick="navTo(event, 'journal')" data-i18n="read_all">Read All Articles</a>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-6 md:px-16">
-                
                 <article class="group cursor-pointer magnetic-btn" onclick="navTo(event, 'journal')">
-                    <div class="w-full aspect-[4/3] overflow-hidden mb-6 relative bg-gray-100 rounded-lg">
+                    <div class="w-full aspect-[4/3] overflow-hidden mb-4 md:mb-6 relative bg-gray-100 rounded-lg">
                         <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800" class="w-full h-full object-cover group-hover:scale-105 transition duration-1000 grayscale group-hover:grayscale-0">
                         <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-sm">
                             <span class="text-[10px] uppercase tracking-widest font-bold text-brand-dark" data-i18n="date_1">Nov 12</span>
@@ -384,13 +394,12 @@
                     </div>
                     <div>
                         <span class="text-brand-gold text-[10px] uppercase tracking-widest font-bold block mb-2">Materiality</span>
-                        <h4 class="text-2xl font-serif text-brand-dark mb-3 leading-snug group-hover:text-brand-gold transition" data-i18n="news_1">The Return of Natural Stone</h4>
-                        <p class="text-sm text-brand-dark/50 leading-relaxed line-clamp-2 font-serif" data-i18n="desc_1">Exploring how marble and travertine are making a massive comeback in modern luxury interiors.</p>
+                        <h4 class="text-xl md:text-2xl font-serif text-brand-dark mb-2 md:mb-3 leading-snug group-hover:text-brand-gold transition" data-i18n="news_1">The Return of Natural Stone</h4>
+                        <p class="text-sm text-brand-dark/50 leading-relaxed line-clamp-2 font-serif" data-i18n="desc_1">Exploring how marble and travertine are making a massive comeback.</p>
                     </div>
                 </article>
-
                 <article class="group cursor-pointer magnetic-btn" onclick="navTo(event, 'journal')">
-                    <div class="w-full aspect-[4/3] overflow-hidden mb-6 relative bg-gray-100 rounded-lg">
+                    <div class="w-full aspect-[4/3] overflow-hidden mb-4 md:mb-6 relative bg-gray-100 rounded-lg">
                         <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=800" class="w-full h-full object-cover group-hover:scale-105 transition duration-1000 grayscale group-hover:grayscale-0">
                         <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-sm">
                             <span class="text-[10px] uppercase tracking-widest font-bold text-brand-dark" data-i18n="date_2">Oct 28</span>
@@ -398,13 +407,12 @@
                     </div>
                     <div>
                         <span class="text-brand-gold text-[10px] uppercase tracking-widest font-bold block mb-2">Trend</span>
-                        <h4 class="text-2xl font-serif text-brand-dark mb-3 leading-snug group-hover:text-brand-gold transition" data-i18n="news_2">Sustainable Luxury in 2026</h4>
-                        <p class="text-sm text-brand-dark/50 leading-relaxed line-clamp-2 font-serif" data-i18n="desc_2">How we integrate ESG principles without compromising on aesthetics and comfort.</p>
+                        <h4 class="text-xl md:text-2xl font-serif text-brand-dark mb-2 md:mb-3 leading-snug group-hover:text-brand-gold transition" data-i18n="news_2">Sustainable Luxury</h4>
+                        <p class="text-sm text-brand-dark/50 leading-relaxed line-clamp-2 font-serif" data-i18n="desc_2">How we integrate ESG principles without compromising on aesthetics.</p>
                     </div>
                 </article>
-
                 <article class="group cursor-pointer magnetic-btn" onclick="navTo(event, 'journal')">
-                    <div class="w-full aspect-[4/3] overflow-hidden mb-6 relative bg-gray-100 rounded-lg">
+                    <div class="w-full aspect-[4/3] overflow-hidden mb-4 md:mb-6 relative bg-gray-100 rounded-lg">
                         <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=800" class="w-full h-full object-cover group-hover:scale-105 transition duration-1000 grayscale group-hover:grayscale-0">
                         <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-sm">
                             <span class="text-[10px] uppercase tracking-widest font-bold text-brand-dark" data-i18n="date_3">Oct 15</span>
@@ -412,11 +420,10 @@
                     </div>
                     <div>
                         <span class="text-brand-gold text-[10px] uppercase tracking-widest font-bold block mb-2">Design</span>
-                        <h4 class="text-2xl font-serif text-brand-dark mb-3 leading-snug group-hover:text-brand-gold transition" data-i18n="news_3">Lighting as Art</h4>
+                        <h4 class="text-xl md:text-2xl font-serif text-brand-dark mb-2 md:mb-3 leading-snug group-hover:text-brand-gold transition" data-i18n="news_3">Lighting as Art</h4>
                         <p class="text-sm text-brand-dark/50 leading-relaxed line-clamp-2 font-serif" data-i18n="desc_3">Why lighting design is the single most important factor in luxury mood.</p>
                     </div>
                 </article>
-
             </div>
         </section>
 
@@ -429,14 +436,15 @@
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
         
-        // PARALLAX TEXT EFFECT
-        document.addEventListener('mousemove', (e) => {
-            document.querySelectorAll('.parallax-text').forEach(el => {
-                const speed = 2;
-                const x = (window.innerWidth - e.pageX * speed) / 100;
-                const y = (window.innerHeight - e.pageY * speed) / 100;
-                el.style.transform = `translateX(${x}px) translateY(${y}px)`;
-            });
+        document.addEventListener("mousemove", (e) => {
+            if(window.innerWidth > 768){
+                document.querySelectorAll('.parallax-text').forEach(el => {
+                    const speed = 2;
+                    const x = (window.innerWidth - e.pageX * speed) / 100;
+                    const y = (window.innerHeight - e.pageY * speed) / 100;
+                    el.style.transform = `translateX(${x}px) translateY(${y}px)`;
+                });
+            }
         });
 
         const pageTranslations = {
@@ -446,8 +454,7 @@
                 
                 partner_subtitle: "The Curator's Palette",
                 partner_desc: "\"We don't just select materials; we curate elements that age gracefully. Only the finest textures make it into our library.\"",
-                partner_title: "Our Material & Craft Selections",
-
+                
                 intro_label: "The Manifesto",
                 intro_text: "\"In a world of speed, we choose the path of <span class='text-brand-gold italic'>slow perfection.</span><br>We don't just build spaces; we craft the backdrop for your legacy.\"",
                 btn_story: "Read Our Philosophy",
@@ -463,10 +470,9 @@
 
                 portfolio_label: "Portfolio",
                 works_title: "Selected Works", view_all: "View All Projects",
+                work_origin: "Origin One", loc_phromphong: "Phromphong, Sukhumvit", 
                 work_panpuri: "Panpuri Wellness", loc_gaysorn: "Gaysorn Village", 
                 work_central: "Central Digital", loc_townhall: "Office Renovation", 
-                work_origin: "Origin One", loc_phromphong: "Phromphong, Sukhumvit", 
-                work_centara: "Centara Grand", loc_pattaya: "Mirage Pattaya", 
 
                 art_living: "The Art of Living",
                 art_light: "Light", desc_light: "Sculpting space with shadow and brilliance.",
@@ -475,12 +481,10 @@
 
                 insights_label: "Insights",
                 journal_title: "Journal", read_all: "Read All Articles",
-                view_all_journal: "Read All", 
-                date_1: "Nov 12", news_1: "The Return of Natural Stone", desc_1: "Exploring how marble and travertine are making a massive comeback in modern luxury interiors.",
-                date_2: "Oct 28", news_2: "Sustainable Luxury in 2026", desc_2: "How we integrate ESG principles without compromising on aesthetics and comfort.",
-                date_3: "Oct 15", news_3: "Lighting as Art", desc_3: "Why lighting design is the single most important factor in luxury mood.",
-                date_4: "Sep 30", news_4: "Smart Home Integration", desc_4: "Seamless technology that hides in plain sight within modern interiors.",
-                date_5: "Sep 12", news_5: "The Artisan Touch", desc_5: "Handcrafted details that define true luxury in an era of mass production."
+                news_1: "The Return of Natural Stone", desc_1: "Exploring how raw marble and travertine are making a massive comeback.",
+                news_2: "Sustainable Luxury in 2026", desc_2: "How we integrate ESG principles without compromising on aesthetics.",
+                news_3: "Lighting as Art", desc_3: "Why lighting design is the single most important factor in luxury mood.",
+                date_1: "Nov 12", date_2: "Oct 28", date_3: "Oct 15"
             },
             th: {
                 hero_title: "นึกถึง <span class='italic text-brand-gold'>ศิลปะ,</span><br>นึกถึง <span class='italic text-brand-gold'>เรา</span>",
@@ -488,8 +492,7 @@
                 
                 partner_subtitle: "จานสีของผู้คัดสรร",
                 partner_desc: "\"เราไม่ได้แค่เลือกวัสดุ แต่เราคัดสรรองค์ประกอบที่จะงดงามตามกาลเวลา เฉพาะพื้นผิวที่ประณีตที่สุดเท่านั้นที่จะอยู่ในคลังของเรา\"",
-                partner_title: "การคัดสรรวัสดุและงานฝีมือ",
-
+                
                 intro_label: "คำมั่นสัญญา",
                 intro_text: "\"ในโลกที่เร่งรีบ เราเลือกเส้นทางของ<span class='text-brand-gold italic'>ความสมบูรณ์แบบที่ละเมียดละไม</span><br>เราไม่ได้แค่สร้างพื้นที่ แต่เราสร้างฉากหลังสำหรับตำนานของคุณ\"",
                 btn_story: "อ่านปรัชญาของเรา",
@@ -505,10 +508,9 @@
 
                 portfolio_label: "ผลงาน",
                 works_title: "ผลงานที่คัดสรร", view_all: "ดูผลงานทั้งหมด",
+                work_origin: "ออริจิ้น วัน", loc_phromphong: "พร้อมพงษ์, สุขุมวิท", 
                 work_panpuri: "ปัญญ์ปุริ เวลเนส", loc_gaysorn: "เกษรวิลเลจ", 
                 work_central: "เซ็นทรัล ดิจิทัล", loc_townhall: "ปรับปรุงออฟฟิศ", 
-                work_origin: "ออริจิ้น วัน", loc_phromphong: "พร้อมพงษ์, สุขุมวิท", 
-                work_centara: "เซ็นทารา แกรนด์", loc_pattaya: "มิราจ พัทยา", 
 
                 art_living: "ศิลปะแห่งการใช้ชีวิต",
                 art_light: "แสงสว่าง", desc_light: "ปั้นแต่งพื้นที่ด้วยแสงเงาและความเจิดจรัส",
@@ -517,12 +519,10 @@
 
                 insights_label: "มุมมอง",
                 journal_title: "บทความ", read_all: "อ่านบทความทั้งหมด",
-                view_all_journal: "อ่านทั้งหมด", 
-                date_1: "12 พ.ย.", news_1: "การกลับมาของหินธรรมชาติ", desc_1: "สำรวจการกลับมาของหินอ่อนและหินทราเวอร์ทีนในการตกแต่งภายในระดับหรูยุคใหม่",
-                date_2: "28 ต.ค.", news_2: "ความหรูหราที่ยั่งยืนในปี 2026", desc_2: "วิธีที่เราผสานหลักการ ESG โดยไม่ลดทอนความสวยงามและความสะดวกสบาย",
-                date_3: "15 ต.ค.", news_3: "แสงสว่างคืองานศิลป์", desc_3: "ทำไมการออกแบบแสงจึงเป็นปัจจัยที่สำคัญที่สุดในการสร้างบรรยากาศที่หรูหรา",
-                date_4: "30 ก.ย.", news_4: "การผสานบ้านอัจฉริยะ", desc_4: "เทคโนโลยีไร้รอยต่อที่ซ่อนตัวอยู่อย่างแนบเนียนในการตกแต่งภายในสมัยใหม่",
-                date_5: "12 ก.ย.", news_5: "สัมผัสแห่งงานฝีมือ", desc_5: "รายละเอียดงานทำมือที่นิยามความหรูหราที่แท้จริงในยุคของการผลิตจำนวนมาก"
+                news_1: "การกลับมาของหินธรรมชาติ", desc_1: "สำรวจการกลับมาของหินอ่อนดิบและหินทราเวอร์ทีนในงานตกแต่งระดับหรู",
+                news_2: "ความหรูหราที่ยั่งยืนในปี 2026", desc_2: "วิธีที่เราผสานหลักการ ESG โดยไม่ลดทอนความสวยงาม",
+                news_3: "แสงสว่างคืองานศิลป์", desc_3: "ทำไมการออกแบบแสงจึงเป็นปัจจัยที่สำคัญที่สุดในการสร้างบรรยากาศที่หรูหรา",
+                date_1: "12 พ.ย.", date_2: "28 ต.ค.", date_3: "15 ต.ค."
             }
         };
     </script>
