@@ -37,17 +37,20 @@
     <style>
         body { background-color: #1d1d1f; color: white; font-family: 'Manrope', 'Noto Sans Thai Loopless', sans-serif; overflow: hidden; }
         
-        /* --- VVIP ISOLATION PROTOCOL --- */
-        /* ซ่อน Navbar, Footer, Chat และปุ่มภาษา ที่มาจาก layout.js */
+        /* VVIP ISOLATION */
         #navbar, #footer, #chat-container, #lang-btn, #menu-overlay { display: none !important; }
         
-        #custom-cursor { 
-            position: fixed; top: 0; left: 0; width: 16px; height: 16px; 
-            background-color: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50%; pointer-events: none; z-index: 20000; 
-            transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s;
+        /* Custom Cursor - Disable on Touch */
+        @media (hover: none) { body { cursor: auto; } #custom-cursor { display: none; } }
+        @media (hover: hover) {
+            #custom-cursor { 
+                position: fixed; top: 0; left: 0; width: 16px; height: 16px; 
+                background-color: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 50%; pointer-events: none; z-index: 20000; 
+                transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s;
+            }
+            #custom-cursor.hovered { width: 40px; height: 40px; background-color: rgba(171, 147, 103, 0.2); border: 1px solid #ab9367; }
         }
-        #custom-cursor.hovered { width: 40px; height: 40px; background-color: rgba(171, 147, 103, 0.2); border: 1px solid #ab9367; }
         
         input:-webkit-autofill,
         input:-webkit-autofill:hover, 
@@ -79,31 +82,31 @@
         <div class="absolute inset-0 bg-[#1d1d1f]/90"></div> 
     </div>
 
-    <a href="index.html" onclick="navTo(event, 'home')" class="fixed top-8 left-8 z-50 text-white/30 hover:text-brand-gold transition duration-500 magnetic-btn flex items-center gap-3 fade-in-element opacity-0 -translate-x-4">
+    <a href="index.html" onclick="navTo(event, 'home')" class="fixed top-6 left-6 md:top-8 md:left-8 z-50 text-white/30 hover:text-brand-gold transition duration-500 magnetic-btn flex items-center gap-3 fade-in-element opacity-0 -translate-x-4">
         <i class="fa-solid fa-arrow-left-long text-sm"></i>
         <span class="text-[10px] uppercase tracking-[0.2em]" data-i18n="back_to_site">Back</span>
     </a>
 
     <main class="relative z-10 w-full h-screen flex flex-col items-center justify-center px-6">
         
-        <div class="mb-16 text-center fade-in-element opacity-0 translate-y-8">
+        <div class="mb-12 md:mb-16 text-center fade-in-element opacity-0 translate-y-8">
             <h1 class="text-3xl md:text-4xl font-serif text-white mb-3 tracking-wide" data-i18n="login_title">Private Access</h1>
             <div class="w-12 h-[1px] bg-brand-gold mx-auto mb-4"></div>
             <p class="text-brand-gold/60 text-[9px] uppercase tracking-[0.4em]" data-i18n="login_subtitle">Craftsman Norman</p>
         </div>
 
-        <form id="login-form" class="w-full max-w-[320px] space-y-10 fade-in-element opacity-0 translate-y-8" onsubmit="handleLogin(event)">
+        <form id="login-form" class="w-full max-w-[300px] md:max-w-[320px] space-y-8 md:space-y-10 fade-in-element opacity-0 translate-y-8" onsubmit="handleLogin(event)">
             <div class="group relative">
-                <input type="text" required class="w-full bg-transparent border-b border-white/10 py-3 text-white outline-none focus:border-brand-gold transition-all duration-500 font-serif text-xl text-center placeholder-transparent peer" id="access_id" placeholder="Client ID">
+                <input type="text" required class="w-full bg-transparent border-b border-white/10 py-3 text-white outline-none focus:border-brand-gold transition-all duration-500 font-serif text-lg md:text-xl text-center placeholder-transparent peer" id="access_id" placeholder="Client ID">
                 <label for="access_id" class="absolute left-0 right-0 text-center -top-4 text-brand-gold text-[9px] uppercase tracking-[0.2em] transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-white/20 peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-brand-gold peer-focus:text-[9px]" data-i18n="label_id">ID</label>
             </div>
 
             <div class="group relative">
-                <input type="password" required class="w-full bg-transparent border-b border-white/10 py-3 text-white outline-none focus:border-brand-gold transition-all duration-500 font-serif text-xl text-center placeholder-transparent peer" id="access_key" placeholder="Passkey">
+                <input type="password" required class="w-full bg-transparent border-b border-white/10 py-3 text-white outline-none focus:border-brand-gold transition-all duration-500 font-serif text-lg md:text-xl text-center placeholder-transparent peer" id="access_key" placeholder="Passkey">
                 <label for="access_key" class="absolute left-0 right-0 text-center -top-4 text-brand-gold text-[9px] uppercase tracking-[0.2em] transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-white/20 peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-brand-gold peer-focus:text-[9px]" data-i18n="label_pass">Key</label>
             </div>
 
-            <div class="pt-8">
+            <div class="pt-6 md:pt-8">
                 <button type="submit" id="submit-btn" class="magnetic-btn w-full py-4 rounded-full border border-white/10 text-white/80 hover:bg-white hover:text-brand-dark transition duration-700 uppercase tracking-[0.25em] text-[10px] font-bold flex items-center justify-center gap-3">
                     <span data-i18n="btn_enter">Enter</span>
                 </button>
@@ -150,7 +153,6 @@
             const currentLang = localStorage.getItem('lang') || 'en';
             applyLoginPageLang(currentLang);
             
-            // Entrance Animation
             gsap.to(".fade-in-element", {
                 y: 0,
                 x: 0,
@@ -171,7 +173,6 @@
             });
         }
 
-        // --- REAL DEMO LOGIN LOGIC ---
         function handleLogin(e) {
             e.preventDefault();
             const btn = document.getElementById('submit-btn');
@@ -179,46 +180,31 @@
             const passInput = document.getElementById('access_key').value;
             const lang = localStorage.getItem('lang') || 'en';
             
-            // *** CONFIG: Set your Demo Credentials Here ***
             const validID = "VIP01";
             const validPass = "1234";
 
-            // Phase 1: Processing (Spinning)
             btn.innerHTML = `<span class="spinner"></span>`;
             btn.classList.add('bg-white/5', 'cursor-not-allowed', 'border-transparent');
             
             setTimeout(() => {
-                // Check Credentials
                 if (idInput === validID && passInput === validPass) {
-                    // --- SUCCESS ---
                     btn.innerHTML = `<span class="text-brand-dark">${loginTranslations[lang].btn_success}</span>`;
                     btn.classList.remove('bg-white/5', 'bg-white', 'text-white/80', 'border-white/10');
                     btn.classList.add('bg-brand-gold', 'text-white', 'border-brand-gold');
-                    
-                    // Redirect to Dashboard
-                    setTimeout(() => {
-                        window.location.href = 'dashboard.html';
-                    }, 800);
-
+                    setTimeout(() => { window.location.href = 'dashboard.html'; }, 800);
                 } else {
-                    // --- ERROR ---
                     btn.innerHTML = `<span class="text-red-400">${loginTranslations[lang].btn_error}</span>`;
                     btn.classList.remove('bg-white/5');
                     btn.classList.add('border-red-500', 'text-red-400');
-                    
-                    // Shake Animation
                     gsap.fromTo("#login-form", {x: -10}, {x: 10, duration: 0.1, repeat: 3, yoyo: true});
-
-                    // Reset Button
                     setTimeout(() => {
                         btn.innerHTML = `<span data-i18n="btn_enter">${loginTranslations[lang].btn_enter}</span>`;
                         btn.classList.remove('border-red-500', 'text-red-400', 'cursor-not-allowed');
                         btn.classList.add('border-white/10', 'text-white/80');
-                        // Re-apply cursor check
                         btn.classList.remove('bg-brand-gold', 'text-white', 'border-brand-gold');
                     }, 2000);
                 }
-            }, 1500); // Fake loading delay
+            }, 1500);
         }
     </script>
 </body>
