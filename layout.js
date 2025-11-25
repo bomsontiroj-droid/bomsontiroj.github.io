@@ -1,4 +1,4 @@
-// layout.js - Final Fixed: Chat Toggle, Added Socials, Clean Navbar, Translated Modal
+// layout.js - Masterpiece Edition: Fully Responsive & Touch Optimized
 
 const globalConfig = {
     email: "craftmannorman.official@hotmail.com",
@@ -38,56 +38,56 @@ function injectLayout() {
 
     <div id="inquiry-modal" class="fixed inset-0 z-[8000] hidden">
         <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="toggleInquiry()"></div>
-        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-white rounded-[32px] p-8 md:p-12 shadow-2xl scale-95 opacity-0 transition-all duration-500 modal-content">
-            <div class="flex justify-between items-center mb-8">
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] md:w-full max-w-lg bg-white rounded-[24px] md:rounded-[32px] p-6 md:p-12 shadow-2xl scale-95 opacity-0 transition-all duration-500 modal-content max-h-[90vh] overflow-y-auto no-scrollbar">
+            <div class="flex justify-between items-center mb-6 md:mb-8">
                 <div>
                     <span class="text-brand-gold text-[10px] uppercase tracking-widest font-bold block mb-1" data-i18n="modal_subtitle">Start a Project</span>
-                    <h3 class="text-3xl font-serif text-brand-dark" data-i18n="modal_title">Inquiry</h3>
+                    <h3 class="text-2xl md:text-3xl font-serif text-brand-dark" data-i18n="modal_title">Inquiry</h3>
                 </div>
-                <button onclick="toggleInquiry()" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-brand-dark hover:text-white transition"><i class="fa-solid fa-xmark"></i></button>
+                <button onclick="toggleInquiry()" class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-brand-dark hover:text-white transition"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <form class="space-y-6" onsubmit="event.preventDefault(); alert('Thank you. We will contact you shortly.'); toggleInquiry();">
+            <form class="space-y-4 md:space-y-6" onsubmit="event.preventDefault(); alert('Thank you. We will contact you shortly.'); toggleInquiry();">
                 <div class="space-y-1">
-                    <label class="text-xs uppercase tracking-widest text-gray-500" data-i18n="form_name">Name</label>
-                    <input type="text" class="w-full border-b border-gray-200 py-2 outline-none focus:border-brand-gold transition font-serif text-xl" placeholder="Your Name" required>
+                    <label class="text-[10px] md:text-xs uppercase tracking-widest text-gray-500" data-i18n="form_name">Name</label>
+                    <input type="text" class="w-full border-b border-gray-200 py-2 outline-none focus:border-brand-gold transition font-serif text-lg md:text-xl" placeholder="Your Name" required>
                 </div>
                 <div class="space-y-1">
-                    <label class="text-xs uppercase tracking-widest text-gray-500" data-i18n="form_email">Email</label>
-                    <input type="email" class="w-full border-b border-gray-200 py-2 outline-none focus:border-brand-gold transition font-serif text-xl" placeholder="email@example.com" required>
+                    <label class="text-[10px] md:text-xs uppercase tracking-widest text-gray-500" data-i18n="form_email">Email</label>
+                    <input type="email" class="w-full border-b border-gray-200 py-2 outline-none focus:border-brand-gold transition font-serif text-lg md:text-xl" placeholder="email@example.com" required>
                 </div>
                 <div class="space-y-1">
-                    <label class="text-xs uppercase tracking-widest text-gray-500" data-i18n="form_interest">Interest</label>
-                    <select class="w-full border-b border-gray-200 py-2 outline-none focus:border-brand-gold transition font-serif text-xl bg-transparent">
+                    <label class="text-[10px] md:text-xs uppercase tracking-widest text-gray-500" data-i18n="form_interest">Interest</label>
+                    <select class="w-full border-b border-gray-200 py-2 outline-none focus:border-brand-gold transition font-serif text-lg md:text-xl bg-transparent">
                         <option data-i18n="opt_arch">Architecture Design</option>
                         <option data-i18n="opt_interior">Interior & Furniture</option>
                         <option data-i18n="opt_turnkey">Turnkey Construction</option>
                     </select>
                 </div>
-                <button type="submit" class="w-full py-4 bg-brand-dark text-white rounded-full hover:bg-brand-gold transition duration-300 font-bold tracking-widest text-xs uppercase mt-4 magnetic-btn" data-i18n="btn_send">Send Request</button>
+                <button type="submit" class="w-full py-3 md:py-4 bg-brand-dark text-white rounded-full hover:bg-brand-gold transition duration-300 font-bold tracking-widest text-[10px] md:text-xs uppercase mt-4 magnetic-btn" data-i18n="btn_send">Send Request</button>
             </form>
         </div>
     </div>
 
-    <nav id="navbar" class="fixed top-2 left-0 w-full z-50 flex justify-center pointer-events-none select-none">
-        <div class="pointer-events-auto bg-white/90 backdrop-blur-xl border border-white/40 shadow-2xl shadow-black/10 rounded-full px-6 py-3 md:px-8 md:py-4 flex items-center gap-6 md:gap-12 transition-all duration-300 hover:scale-[1.005]">
+    <nav id="navbar" class="fixed top-2 md:top-4 left-0 w-full z-50 flex justify-center pointer-events-none select-none px-4">
+        <div class="pointer-events-auto bg-white/90 backdrop-blur-xl border border-white/40 shadow-2xl shadow-black/10 rounded-full px-5 py-3 md:px-8 md:py-4 flex items-center gap-4 md:gap-12 transition-all duration-300 hover:scale-[1.005]">
             
             <button id="lang-btn" onclick="toggleLang()" class="magnetic-btn w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold tracking-widest text-brand-dark bg-brand-bg hover:bg-brand-gold hover:text-white transition duration-300">TH</button>
             
             <a href="index.html" id="site-logo" onclick="navTo(event, 'home', false)" class="text-center group flex flex-col items-center cursor-pointer" translate="no">
-                <h1 class="text-xl md:text-2xl text-brand-dark leading-none group-hover:text-brand-gold transition duration-300 whitespace-nowrap" 
+                <h1 class="text-lg md:text-2xl text-brand-dark leading-none group-hover:text-brand-gold transition duration-300 whitespace-nowrap" 
                     style="font-family: 'Italiana', serif !important;">
                     CRAFTSMAN
                 </h1>
-                <span class="text-[8px] uppercase text-brand-dark/50 group-hover:text-brand-gold/80 transition duration-300 whitespace-nowrap tracking-[0.3em]">
+                <span class="text-[6px] md:text-[8px] uppercase text-brand-dark/50 group-hover:text-brand-gold/80 transition duration-300 whitespace-nowrap tracking-[0.3em]">
                     Norman
                 </span>
             </a>
 
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2 md:gap-4">
                 <button onclick="toggleMenu()" class="magnetic-btn w-8 h-8 rounded-full flex items-center justify-center text-brand-dark hover:text-brand-gold transition duration-300 group">
                     <div class="space-y-1">
-                        <span class="block w-4 h-[1.5px] bg-current rounded-full group-hover:w-5 transition-all"></span>
-                        <span class="block w-4 h-[1.5px] bg-current rounded-full group-hover:w-3 ml-auto transition-all"></span>
+                        <span class="block w-3 md:w-4 h-[1.5px] bg-current rounded-full group-hover:w-5 transition-all"></span>
+                        <span class="block w-3 md:w-4 h-[1.5px] bg-current rounded-full group-hover:w-3 ml-auto transition-all"></span>
                     </div>
                 </button>
             </div>
@@ -97,24 +97,24 @@ function injectLayout() {
     <div id="menu-overlay" class="fixed inset-0 bg-[#1d1d1f] z-[60] transform translate-y-[110%] transition-transform duration-1000 cubic-bezier(0.76, 0, 0.24, 1) flex flex-col items-center justify-center overflow-hidden text-white">
         <div class="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000')] bg-cover bg-center mix-blend-overlay"></div>
         
-        <button onclick="toggleMenu()" class="magnetic-btn absolute top-8 right-8 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition duration-300 z-20">
+        <button onclick="toggleMenu()" class="magnetic-btn absolute top-6 right-6 md:top-8 md:right-8 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition duration-300 z-20">
             <i class="fa-solid fa-xmark text-lg"></i>
         </button>
 
-        <div class="text-center space-y-2 md:space-y-4 relative z-10">
-            <a href="#" class="block text-4xl md:text-7xl font-serif text-white/50 hover:text-brand-gold transition duration-300 hover:scale-105 transform origin-center menu-item" onclick="navTo(event, 'home', true)"><span data-i18n="nav_home">Home</span></a>
-            <a href="#" class="block text-4xl md:text-7xl font-serif text-white/50 hover:text-brand-gold transition duration-300 hover:scale-105 transform origin-center menu-item" onclick="navTo(event, 'story', true)"><span data-i18n="nav_story">Our Story</span></a>
-            <a href="#" class="block text-4xl md:text-7xl font-serif text-white/50 hover:text-brand-gold transition duration-300 hover:scale-105 transform origin-center menu-item" onclick="navTo(event, 'expertise', true)"><span data-i18n="nav_services">Expertise</span></a>
-            <a href="#" class="block text-4xl md:text-7xl font-serif text-white/50 hover:text-brand-gold transition duration-300 hover:scale-105 transform origin-center menu-item" onclick="navTo(event, 'works', true)"><span data-i18n="nav_portfolio">Works</span></a>
-            <a href="#" class="block text-4xl md:text-7xl font-serif text-white/50 hover:text-brand-gold transition duration-300 hover:scale-105 transform origin-center menu-item" onclick="navTo(event, 'journal', true)"><span data-i18n="journal_title">Journal</span></a>
-            <a href="#" class="block text-4xl md:text-7xl font-serif text-white/50 hover:text-brand-gold transition duration-300 hover:scale-105 transform origin-center menu-item" onclick="navTo(event, 'contact', true)"><span data-i18n="nav_contact">Contact</span></a>
+        <div class="text-center space-y-3 md:space-y-6 relative z-10">
+            <a href="#" class="block text-3xl md:text-7xl font-serif text-white/50 hover:text-brand-gold transition duration-300 hover:scale-105 transform origin-center menu-item" onclick="navTo(event, 'home', true)"><span data-i18n="nav_home">Home</span></a>
+            <a href="#" class="block text-3xl md:text-7xl font-serif text-white/50 hover:text-brand-gold transition duration-300 hover:scale-105 transform origin-center menu-item" onclick="navTo(event, 'story', true)"><span data-i18n="nav_story">Our Story</span></a>
+            <a href="#" class="block text-3xl md:text-7xl font-serif text-white/50 hover:text-brand-gold transition duration-300 hover:scale-105 transform origin-center menu-item" onclick="navTo(event, 'expertise', true)"><span data-i18n="nav_services">Expertise</span></a>
+            <a href="#" class="block text-3xl md:text-7xl font-serif text-white/50 hover:text-brand-gold transition duration-300 hover:scale-105 transform origin-center menu-item" onclick="navTo(event, 'works', true)"><span data-i18n="nav_portfolio">Works</span></a>
+            <a href="#" class="block text-3xl md:text-7xl font-serif text-white/50 hover:text-brand-gold transition duration-300 hover:scale-105 transform origin-center menu-item" onclick="navTo(event, 'journal', true)"><span data-i18n="journal_title">Journal</span></a>
+            <a href="#" class="block text-3xl md:text-7xl font-serif text-white/50 hover:text-brand-gold transition duration-300 hover:scale-105 transform origin-center menu-item" onclick="navTo(event, 'contact', true)"><span data-i18n="nav_contact">Contact</span></a>
         </div>
         
-        <div class="absolute bottom-12 flex gap-8 text-xl z-10">
+        <div class="absolute bottom-8 md:bottom-12 flex gap-6 md:gap-8 text-xl z-10">
              ${globalConfig.socials.map(s => `<a href="${s.url}" class="text-white/30 hover:text-brand-gold transition magnetic-btn"><i class="fa-brands ${s.icon}"></i></a>`).join('')}
         </div>
 
-        <div class="absolute bottom-8 right-8 z-20 hidden md:block">
+        <div class="absolute bottom-6 right-6 md:bottom-8 md:right-8 z-20 hidden md:block">
             <a href="login.html" class="text-[10px] uppercase tracking-[0.2em] text-white/20 hover:text-brand-gold transition duration-500 magnetic-btn flex items-center gap-2 group" onclick="navTo(event, 'login')">
                 <i class="fa-solid fa-lock text-[8px] group-hover:opacity-100 opacity-50 transition"></i>
                 <span data-i18n="nav_client">Client Access</span>
@@ -138,37 +138,37 @@ function injectLayout() {
     </div>
 
     <footer id="footer" class="relative z-10 px-4 pb-4 pt-12">
-        <div class="bg-[#1d1d1f] rounded-[40px] px-8 py-16 md:p-24 shadow-sm overflow-hidden relative">
-            <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-gold/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+        <div class="bg-[#1d1d1f] rounded-[24px] md:rounded-[40px] px-6 py-12 md:px-8 md:py-24 shadow-sm overflow-hidden relative">
+            <div class="absolute top-0 right-0 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-brand-gold/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
             <div class="max-w-[1600px] mx-auto relative z-10">
-                <div class="text-center mb-16 border-b border-white/10 pb-16">
-                    <h2 class="text-5xl md:text-8xl leading-tight font-serif text-white cursor-default hover:text-brand-gold transition duration-500" data-i18n="footer_tagline">
+                <div class="text-center mb-12 md:mb-16 border-b border-white/10 pb-12 md:pb-16">
+                    <h2 class="text-4xl md:text-8xl leading-tight font-serif text-white cursor-default hover:text-brand-gold transition duration-500" data-i18n="footer_tagline">
                         Let's Craft<br>Your Dream
                     </h2>
-                    <button onclick="toggleInquiry()" class="mt-8 px-8 py-3 rounded-full border border-white/20 text-white hover:bg-brand-gold hover:border-brand-gold transition duration-300 magnetic-btn" data-i18n="modal_subtitle">
+                    <button onclick="toggleInquiry()" class="mt-6 md:mt-8 px-6 py-3 md:px-8 md:py-3 rounded-full border border-white/20 text-white hover:bg-brand-gold hover:border-brand-gold transition duration-300 magnetic-btn text-xs md:text-sm uppercase tracking-widest" data-i18n="modal_subtitle">
                         Start a Project
                     </button>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-12 mb-20">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-12 md:mb-20 text-center md:text-left">
                     <div>
-                        <span class="text-brand-gold text-[10px] uppercase tracking-[0.2em] font-bold mb-6 block" data-i18n="label_contact">Contact</span>
-                        <a href="mailto:${globalConfig.email}" class="block text-xl font-serif text-white hover:text-brand-gold transition mb-2 break-all">${globalConfig.email}</a>
-                        <a href="tel:${globalConfig.phone}" class="block text-lg text-white/60 font-sans hover:text-brand-gold transition">${globalConfig.phone}</a>
+                        <span class="text-brand-gold text-[10px] uppercase tracking-[0.2em] font-bold mb-4 md:mb-6 block" data-i18n="label_contact">Contact</span>
+                        <a href="mailto:${globalConfig.email}" class="block text-lg md:text-xl font-serif text-white hover:text-brand-gold transition mb-2 break-all">${globalConfig.email}</a>
+                        <a href="tel:${globalConfig.phone}" class="block text-base md:text-lg text-white/60 font-sans hover:text-brand-gold transition">${globalConfig.phone}</a>
                     </div>
                     <div class="md:text-center">
-                        <span class="text-brand-gold text-[10px] uppercase tracking-[0.2em] font-bold mb-6 block" data-i18n="label_studio">Studio</span>
-                        <address class="not-italic text-white/60 leading-relaxed text-lg" data-i18n="address">Bangkok, Thailand<br>Open: Mon - Fri, 09:00 - 18:00</address>
+                        <span class="text-brand-gold text-[10px] uppercase tracking-[0.2em] font-bold mb-4 md:mb-6 block" data-i18n="label_studio">Studio</span>
+                        <address class="not-italic text-white/60 leading-relaxed text-base md:text-lg" data-i18n="address">Bangkok, Thailand<br>Open: Mon - Fri, 09:00 - 18:00</address>
                     </div>
                     <div class="md:text-right">
-                        <span class="text-brand-gold text-[10px] uppercase tracking-[0.2em] font-bold mb-6 block" data-i18n="label_follow">Follow Us</span>
-                        <div class="flex gap-8 justify-start md:justify-end text-2xl text-white">
+                        <span class="text-brand-gold text-[10px] uppercase tracking-[0.2em] font-bold mb-4 md:mb-6 block" data-i18n="label_follow">Follow Us</span>
+                        <div class="flex gap-6 md:gap-8 justify-center md:justify-end text-xl md:text-2xl text-white">
                             ${globalConfig.socials.map(s => `<a href="${s.url}" class="hover:text-brand-gold hover:-translate-y-1 transition duration-300"><i class="fa-brands ${s.icon}"></i></a>`).join('')}
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-widest text-white/40 pt-8 border-t border-white/10">
+                <div class="flex flex-col md:flex-row justify-between items-center text-[9px] md:text-[10px] uppercase tracking-widest text-white/40 pt-6 md:pt-8 border-t border-white/10 gap-4 md:gap-0">
                     <p>© 2025 CRAFTSMAN NORMAN.</p>
-                    <div class="flex gap-8 mt-4 md:mt-0">
+                    <div class="flex gap-6 md:gap-8">
                         <a href="privacy.html" class="hover:text-white transition" data-i18n="label_privacy">Privacy</a>
                         <a href="terms.html" class="hover:text-white transition" data-i18n="label_terms">Terms</a>
                     </div>
@@ -198,6 +198,10 @@ function injectStyles() {
         #chat-container.active .icon-chat { opacity: 0; }
         #chat-container.active .icon-close { opacity: 1; }
         #chat-container.active .notification-dot { display: none; }
+        
+        /* Hide Scrollbar for Modal */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     `;
     document.head.appendChild(style);
 }
@@ -241,6 +245,9 @@ function initGlobalEvents() {
 }
 
 function initMagneticButtons() {
+    // Disable magnetic effect on touch devices to prevent weird behavior
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
     const magnets = document.querySelectorAll('.magnetic-btn');
     magnets.forEach((magnet) => {
         magnet.addEventListener('mousemove', (e) => {
@@ -352,7 +359,6 @@ const translations = {
         journal_title: "Journal",
         nav_client: "Client Access",
         
-        // MODAL & INQUIRY
         modal_subtitle: "Start a Project",
         modal_title: "Inquiry",
         form_name: "Name",
@@ -371,7 +377,6 @@ const translations = {
         journal_title: "บทความ",
         nav_client: "เข้าสู่ระบบลูกค้า",
 
-        // MODAL & INQUIRY THAI
         modal_subtitle: "เริ่มต้นโครงการ",
         modal_title: "สอบถามข้อมูล",
         form_name: "ชื่อ",
