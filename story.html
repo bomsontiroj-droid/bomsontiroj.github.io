@@ -198,8 +198,8 @@
 
         <section id="leadership" class="max-w-[1600px] mx-auto mb-24 md:mb-32 px-6">
             <div class="text-center mb-12 md:mb-20">
-                <span class="text-brand-gold uppercase tracking-[0.3em] text-[10px] md:text-xs mb-4 block" data-i18n="team_label">The Artisans</span>
-                <h2 class="text-3xl md:text-6xl font-serif text-brand-dark" data-i18n="team_title">Behind the Masterpiece</h2>
+                <span class="text-brand-gold uppercase tracking-[0.3em] text-[10px] md:text-xs mb-4 block" data-i18n="team_label">The Leadership</span>
+                <h2 class="text-3xl md:text-6xl font-serif text-brand-dark" data-i18n="team_title">Guiding the Legacy</h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-8">
@@ -217,7 +217,7 @@
                     </div>
                 </div>
 
-                <div class="group cursor-pointer magnetic-btn md:-mt-16">
+                <div class="group cursor-pointer magnetic-btn">
                     <div class="h-[450px] md:h-[550px] relative overflow-hidden rounded-[4px] mb-4 md:mb-6">
                         <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1000" class="absolute inset-0 w-full h-full object-cover transition duration-[1.5s] group-hover:scale-110 grayscale group-hover:grayscale-0 object-top">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
@@ -260,7 +260,6 @@
         document.addEventListener("DOMContentLoaded", () => {
             gsap.from(".fade-in", { y: 50, opacity: 0, duration: 1.5, stagger: 0.2, ease: "power3.out", delay: 0.5 });
             
-            // Only use Parallax on larger screens
             if(window.innerWidth > 768) {
                 gsap.to(".parallax-img", { yPercent: 20, ease: "none", scrollTrigger: { trigger: "#hero-container", start: "top top", end: "bottom top", scrub: true } });
             }
@@ -270,7 +269,7 @@
             });
         });
         
-        // Page Translations (Unchanged)
+        // Page Translations (Updated Keys)
         const pageTranslations = {
             en: {
                 story_subtitle: "The Untold Story", 
@@ -299,7 +298,9 @@
                 esg_3_title: "Transparent Integrity", esg_3_desc: "Honesty is our most valuable currency. We operate with absolute transparency, treating your investment as if it were our own.",
                 esg_4_title: "Legacy Building", esg_4_desc: "We don't build for today. We build for the next generation. Structures designed to age beautifully and last for 100 years.",
 
-                team_label: "The Artisans", team_title: "Behind the Masterpiece",
+                // UPDATED TEAM SECTION
+                team_label: "The Leadership", 
+                team_title: "Guiding the Legacy",
                 name_ceo: "Chaowadee Sontiroj", role_ceo_spiritual: "The Visionary", desc_ceo: "\"True luxury is the absence of irritation.\"",
                 name_cfo: "Chonbodee Sontiroj", role_cfo_spiritual: "The Architect of Stability", desc_cfo: "\"Creativity needs a solid foundation to soar.\"",
                 name_cdo: "Reungchan Tedlek", role_cdo_spiritual: "The Perfectionist", desc_cdo: "\"God is in the details. So are we.\""
@@ -331,7 +332,9 @@
                 esg_3_title: "ความซื่อสัตย์และโปร่งใส", esg_3_desc: "ความจริงใจคือสกุลเงินที่มีค่าที่สุดของเรา เราทำงานด้วยความโปร่งใสในทุกขั้นตอน ดูแลการลงทุนของคุณเหมือนเป็นของเราเอง",
                 esg_4_title: "สร้างมรดก", esg_4_desc: "เราไม่ได้สร้างเพื่อวันนี้ แต่เพื่อคนรุ่นต่อไป โครงสร้างที่ออกแบบมาให้งดงามขึ้นตามกาลเวลาและคงอยู่เป็นร้อยปี",
 
-                team_label: "ช่างฝีมือ", team_title: "เบื้องหลังผลงานระดับตำนาน",
+                // UPDATED TEAM SECTION THAI
+                team_label: "คณะผู้บริหาร", 
+                team_title: "ผู้นำทางสู่ตำนาน",
                 name_ceo: "เชาวดี สนธิโรจน์", role_ceo_spiritual: "ผู้มองเห็นอนาคต", desc_ceo: "\"ความหรูหราที่แท้จริง คือการไม่มีสิ่งที่กวนใจ\"",
                 name_cfo: "ชนบดี สนธิโรจน์", role_cfo_spiritual: "สถาปนิกแห่งความมั่นคง", desc_cfo: "\"ความคิดสร้างสรรค์ต้องมีรากฐานที่มั่นคงจึงจะโบยบินได้\"",
                 name_cdo: "เรืองชาญ เทศเล็ก", role_cdo_spiritual: "ผู้แสวงหาความสมบูรณ์แบบ", desc_cdo: "\"พระเจ้าอยู่ในรายละเอียด เราก็เช่นกัน\""
