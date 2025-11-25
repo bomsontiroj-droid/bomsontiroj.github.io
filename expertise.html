@@ -50,10 +50,13 @@
         }
         #custom-cursor.hovered { width: 40px; height: 40px; background-color: rgba(171, 147, 103, 0.2); border: 1px solid #ab9367; }
 
-        /* Smooth Rounding */
-        #hero-container, .rounded-section { 
+        /* Rounding & Parallax */
+        #hero-container { 
             clip-path: inset(0 round 32px); 
             transition: clip-path 1s cubic-bezier(0.77, 0, 0.175, 1); 
+        }
+        .parallax-bg {
+            background-attachment: fixed; background-position: center; background-size: cover;
         }
         
         .protected-media { -webkit-user-drag: none; user-select: none; pointer-events: none; }
@@ -67,7 +70,7 @@
         
         <header class="relative w-full max-w-[1600px] mx-auto h-[85vh] mb-24">
             <div id="hero-container" class="w-full h-full relative overflow-hidden bg-black shadow-2xl">
-                <img src="https://images.unsplash.com/photo-1470075801209-17f9ec0cada6?q=80&w=2000" class="absolute inset-0 w-full h-full object-cover opacity-60 parallax-img grayscale protected-media">
+                <img src="https://images.unsplash.com/photo-1470075801209-17f9ec0cada6?q=80&w=2000" class="absolute inset-0 w-full h-full object-cover opacity-60 parallax-bg grayscale protected-media">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
                 
                 <div class="absolute bottom-0 left-0 w-full p-6 md:p-12 z-20">
@@ -78,7 +81,7 @@
                                 The Art of <br><span class="italic text-brand-gold">Precision.</span>
                             </h1>
                         </div>
-                        <div class="backdrop-blur-xl bg-white/10 p-8 rounded-[32px] border border-white/20 max-w-lg shadow-lg fade-in">
+                        <div class="backdrop-blur-xl bg-white/10 p-8 rounded-[32px] border border-white/20 max-w-lg shadow-lg fade-in hover:bg-white/20 transition duration-500">
                              <p class="text-white/95 text-sm md:text-base font-sans leading-relaxed" data-i18n="exp_desc">
                                 Comprehensive design services tailored for the elite. From conceptual architecture to the finest interior details.
                             </p>
@@ -88,7 +91,7 @@
             </div>
         </header>
 
-        <section class="max-w-[1600px] mx-auto mb-32 px-6">
+        <section class="max-w-[1600px] mx-auto mb-32 px-6 md:px-12">
             <div class="text-center mb-20">
                 <span class="text-brand-gold uppercase tracking-[0.3em] text-xs mb-4 block" data-i18n="services_label">Our Expertise</span>
                 <h2 class="text-4xl md:text-6xl font-serif text-brand-dark" data-i18n="services_title">A Full Spectrum of Design</h2>
@@ -96,10 +99,10 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <div class="group relative h-[500px] rounded-[24px] overflow-hidden magnetic-btn">
+                <div class="group relative h-[500px] rounded-[24px] overflow-hidden magnetic-btn shadow-lg">
                     <img src="https://images.unsplash.com/photo-1600607687644-c7171b42498b?q=80&w=1000" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-1000 scale-105 group-hover:scale-100 protected-media">
                     <div class="absolute inset-0 bg-gradient-to-t from-[#1d1d1f]/90 via-[#1d1d1f]/40 to-transparent"></div>
-                    <div class="absolute inset-0 p-8 flex flex-col justify-between">
+                    <div class="absolute inset-0 p-10 flex flex-col justify-between">
                         <span class="text-brand-gold font-serif text-5xl opacity-50 group-hover:opacity-100 transition">01</span>
                         <div>
                             <h3 class="text-white text-3xl font-serif mb-4" data-i18n="srv_arch">Architecture Design</h3>
@@ -110,10 +113,10 @@
                     </div>
                 </div>
 
-                <div class="group relative h-[500px] rounded-[24px] overflow-hidden magnetic-btn">
+                <div class="group relative h-[500px] rounded-[24px] overflow-hidden magnetic-btn shadow-lg">
                     <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1000" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-1000 scale-105 group-hover:scale-100 protected-media">
                     <div class="absolute inset-0 bg-gradient-to-t from-[#1d1d1f]/90 via-[#1d1d1f]/40 to-transparent"></div>
-                    <div class="absolute inset-0 p-8 flex flex-col justify-between">
+                    <div class="absolute inset-0 p-10 flex flex-col justify-between">
                         <span class="text-brand-gold font-serif text-5xl opacity-50 group-hover:opacity-100 transition">02</span>
                         <div>
                             <h3 class="text-white text-3xl font-serif mb-4" data-i18n="srv_interior">Interior & Furniture</h3>
@@ -124,10 +127,10 @@
                     </div>
                 </div>
 
-                <div class="group relative h-[500px] rounded-[24px] overflow-hidden magnetic-btn">
+                <div class="group relative h-[500px] rounded-[24px] overflow-hidden magnetic-btn shadow-lg">
                     <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1000" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-1000 scale-105 group-hover:scale-100 protected-media">
                     <div class="absolute inset-0 bg-gradient-to-t from-[#1d1d1f]/90 via-[#1d1d1f]/40 to-transparent"></div>
-                    <div class="absolute inset-0 p-8 flex flex-col justify-between">
+                    <div class="absolute inset-0 p-10 flex flex-col justify-between">
                         <span class="text-brand-gold font-serif text-5xl opacity-50 group-hover:opacity-100 transition">03</span>
                         <div>
                             <h3 class="text-white text-3xl font-serif mb-4" data-i18n="srv_turnkey">Renovation & Turnkey</h3>
@@ -138,10 +141,10 @@
                     </div>
                 </div>
 
-                <div class="group relative h-[500px] rounded-[24px] overflow-hidden magnetic-btn">
+                <div class="group relative h-[500px] rounded-[24px] overflow-hidden magnetic-btn shadow-lg">
                     <img src="https://images.unsplash.com/photo-1626785774573-4b799315542f?q=80&w=1000" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-1000 scale-105 group-hover:scale-100 protected-media">
                     <div class="absolute inset-0 bg-gradient-to-t from-[#1d1d1f]/90 via-[#1d1d1f]/40 to-transparent"></div>
-                    <div class="absolute inset-0 p-8 flex flex-col justify-between">
+                    <div class="absolute inset-0 p-10 flex flex-col justify-between">
                         <span class="text-brand-gold font-serif text-5xl opacity-50 group-hover:opacity-100 transition">04</span>
                         <div>
                             <h3 class="text-white text-3xl font-serif mb-4" data-i18n="srv_brand">Branding & Identity</h3>
@@ -152,10 +155,10 @@
                     </div>
                 </div>
 
-                <div class="group relative h-[500px] rounded-[24px] overflow-hidden magnetic-btn">
+                <div class="group relative h-[500px] rounded-[24px] overflow-hidden magnetic-btn shadow-lg">
                     <img src="https://images.unsplash.com/photo-1579632652768-6cb9dcf85912?q=80&w=1000" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-1000 scale-105 group-hover:scale-100 protected-media">
                     <div class="absolute inset-0 bg-gradient-to-t from-[#1d1d1f]/90 via-[#1d1d1f]/40 to-transparent"></div>
-                    <div class="absolute inset-0 p-8 flex flex-col justify-between">
+                    <div class="absolute inset-0 p-10 flex flex-col justify-between">
                         <span class="text-brand-gold font-serif text-5xl opacity-50 group-hover:opacity-100 transition">05</span>
                         <div>
                             <h3 class="text-white text-3xl font-serif mb-4" data-i18n="srv_video">Video & Content</h3>
@@ -166,10 +169,10 @@
                     </div>
                 </div>
 
-                <div class="group relative h-[500px] rounded-[24px] overflow-hidden magnetic-btn">
+                <div class="group relative h-[500px] rounded-[24px] overflow-hidden magnetic-btn shadow-lg">
                     <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?q=80&w=1000" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-1000 scale-105 group-hover:scale-100 protected-media">
                     <div class="absolute inset-0 bg-gradient-to-t from-[#1d1d1f]/90 via-[#1d1d1f]/40 to-transparent"></div>
-                    <div class="absolute inset-0 p-8 flex flex-col justify-between">
+                    <div class="absolute inset-0 p-10 flex flex-col justify-between">
                         <span class="text-brand-gold font-serif text-5xl opacity-50 group-hover:opacity-100 transition">06</span>
                         <div>
                             <h3 class="text-white text-3xl font-serif mb-4" data-i18n="srv_product">Product Design</h3>
@@ -180,10 +183,10 @@
                     </div>
                 </div>
 
-                <div class="group relative h-[500px] rounded-[24px] overflow-hidden magnetic-btn lg:col-start-2">
+                <div class="group relative h-[500px] rounded-[24px] overflow-hidden magnetic-btn lg:col-start-2 shadow-lg">
                     <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1000" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-1000 scale-105 group-hover:scale-100 protected-media">
                     <div class="absolute inset-0 bg-gradient-to-t from-[#1d1d1f]/90 via-[#1d1d1f]/40 to-transparent"></div>
-                    <div class="absolute inset-0 p-8 flex flex-col justify-between">
+                    <div class="absolute inset-0 p-10 flex flex-col justify-between">
                         <span class="text-brand-gold font-serif text-5xl opacity-50 group-hover:opacity-100 transition">07</span>
                         <div>
                             <h3 class="text-white text-3xl font-serif mb-4" data-i18n="srv_consult">Consultancy</h3>
@@ -197,7 +200,7 @@
             </div>
         </section>
 
-        <section class="py-24 bg-[#1d1d1f] text-white relative overflow-hidden mb-24 rounded-[32px] mx-4">
+        <section class="py-32 bg-[#1d1d1f] text-white relative overflow-hidden mb-32 rounded-[32px] mx-4">
             <div class="max-w-[1200px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center relative z-10">
                 <div>
                     <span class="text-brand-gold text-xs uppercase tracking-[0.3em] font-bold block mb-6" data-i18n="tech_label">Innovation</span>
@@ -371,21 +374,8 @@
                 });
             });
         });
-
-        // Magnetic Buttons
-        document.querySelectorAll('.magnetic-btn').forEach((magnet) => {
-            magnet.addEventListener('mousemove', (e) => {
-                const rect = magnet.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                gsap.to(magnet, { x: x * 0.15, y: y * 0.15, duration: 0.3, ease: 'power2.out' });
-            });
-            magnet.addEventListener('mouseleave', () => {
-                gsap.to(magnet, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.3)' });
-            });
-        });
         
-        // Page Translations
+        // Translations
         const pageTranslations = {
             en: {
                 exp_subtitle: "What We Do", 
