@@ -114,8 +114,8 @@ function injectLayout() {
              ${globalConfig.socials.map(s => `<a href="${s.url}" class="text-white/30 hover:text-brand-gold transition magnetic-btn"><i class="fa-brands ${s.icon}"></i></a>`).join('')}
         </div>
 
-        <div class="absolute bottom-6 right-6 md:bottom-8 md:right-8 z-20 hidden md:block">
-            <a href="login.html" class="text-[10px] uppercase tracking-[0.2em] text-white/20 hover:text-brand-gold transition duration-500 magnetic-btn flex items-center gap-2 group" onclick="navTo(event, 'login')">
+        <div class="absolute top-6 left-6 md:top-auto md:left-auto md:bottom-8 md:right-8 z-20 block">
+            <a href="login.html" class="text-[10px] uppercase tracking-[0.2em] text-white/30 hover:text-brand-gold transition duration-500 magnetic-btn flex items-center gap-2 group" onclick="navTo(event, 'login')">
                 <i class="fa-solid fa-lock text-[8px] group-hover:opacity-100 opacity-50 transition"></i>
                 <span data-i18n="nav_client">Client Access</span>
             </a>
